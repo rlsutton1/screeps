@@ -4,11 +4,12 @@ var roleMiner = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-    run: function(creep) {
+    run: function(creep,utils) {
         utils.log("m.");
         creep.say('m');
         if (creep.carry.energy < creep.carryCapacity)
         {
+            console.log('get target');
             var source = utils.getStoredTarget(creep,'myLoadingTarget');
 	        if (source ==null)
 	        {

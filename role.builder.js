@@ -4,7 +4,7 @@ var roleBuilder = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-	run : function(creep) {
+	run : function(creep, utils) {
 
 		creep.say('b');
 		utils.log("b.");
@@ -20,7 +20,12 @@ var roleBuilder = {
 			}
 		}
 		if (target) {
-			if (creep.build(target) == ERR_NOT_IN_RANGE) {
+			if (creep.pos == target.pos) {
+				target.remove();
+			}
+			var ret = creep.build(target);
+			console.log('builder ret ' + ret);
+			if (ret == ERR_NOT_IN_RANGE) {
 				creep.moveTo(target, {
 					visualizePathStyle : {
 						stroke : '#ffffff'

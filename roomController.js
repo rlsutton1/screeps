@@ -19,7 +19,7 @@ module.exports = {
     
 
 
-run:function (room,mySettings) {
+run:function (room,mySettings,utils) {
 
 
 
@@ -66,7 +66,7 @@ run:function (room,mySettings) {
             {
                 var buildInfo = mySettings['creepBuildList'][roll];
          
-                var creeps = _.filter(roomsCreeps, (creep) =>  creep.memory !=null && creep.memory.role == buildInfo['roll']);
+                var creeps = _.filter(roomsCreeps, (creep) => creep.memory.role == buildInfo['roll']);
        
               // utils.log(buildInfo['roll']+' in existance: '+
 				// creeps.length+'/'+buildInfo.qty);
@@ -111,43 +111,43 @@ run:function (room,mySettings) {
 
         room.memory.maxHp +=0.5;
 
+// return;
         utils.log("before creeps");
         for(var name in roomsCreeps) {
 // utils.log('Cpu Used '+Game.cpu.getUsed());
             var creep = roomsCreeps[name];
-            try
-            {
-                if ( creep.memory !=null && creep.fatigue<= 0)
+// try
+// {
+                if (creep.fatigue<= 0)
                 {
                     if(creep.memory.role == 'harvester') {
-                        roleHarvester.run(creep);
+                        roleHarvester.run(creep,utils);
                     }
                     if(creep.memory.role == 'upgrader') {
-                        roleUpgrader.run(creep);
+                        roleUpgrader.run(creep,utils);
                     }
                     if(creep.memory.role == 'builder') {
-                        roleBuilder.run(creep);
+                        roleBuilder.run(creep,utils);
                     }
                     if (creep.memory.role == 'courier')
                     {   
-                        roleCourier.run(creep);
+                        roleCourier.run(creep,utils);
                     }
                     if (creep.memory.role=='explorer')
                     {
-                        roleExplorer.run(creep);
+                        roleExplorer.run(creep,utils);
                     }
                     if(creep.memory.role == 'healer') {
-                        roleHealer.run(creep);
+                        roleHealer.run(creep,utils);
                     }
                 }
-            }
-            catch (err)
-            {
-                Game.notify(err,60);
-                utils.log(err);
-                console.log(err);
-                // throw err;
-            }
+// }
+// catch (err)
+// {
+// utils.notify(err,60);
+// console.log(err);
+// utils.log(err);
+// }
         }
     
     utils.log("after creeps");

@@ -9,13 +9,13 @@
 
 
 var roleHealer = {
-    run: function(creep) {
+    run: function(creep,utils) {
         creep.say('hh');
 // console.log("healer");
         
         var defender = utils.getStoredTarget(creep,'defenderTarget');
 	    if (defender==null) {
-            var defenders = _.filter(creep.room.find (FIND_MY_CREEPS), (creep) => creep.memory !=null && creep.memory.role == 'defender')
+            var defenders = _.filter(creep.room.find (FIND_MY_CREEPS), (creep) => creep.memory.role == 'defender')
             defender = creep.pos.findClosestByPath(defenders);
         }
         if (defender !=null) {

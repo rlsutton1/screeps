@@ -12,7 +12,7 @@ var roleHealer = require('role.healer');
 
 
 module.exports = {
-    run:function (room) {
+    run:function (room,utils) {
     
         var roomsCreeps = room.find (FIND_MY_CREEPS);
 
@@ -22,16 +22,16 @@ module.exports = {
             try
             {
                 
-                if( creep.memory !=null  && creep.memory.role == 'defender') {
+                if(creep.memory.role == 'defender') {
                     roleDefender.run(creep);
                 }
-                if( creep.memory !=null && creep.memory.role == 'healer') {
+                if(creep.memory.role == 'healer') {
                     roleHealer.run(creep);
                 }
             }
             catch (err)
             {
-                Game.notify('defence: '+err,60);
+                utils.notify(err,60);
                 utils.log(err);
             }
         }
@@ -40,7 +40,7 @@ module.exports = {
         var walls = room.find(FIND_STRUCTURES, {filter: (s) => s.structureType == STRUCTURE_WALL || s.structureType == STRUCTURE_RAMPART});
         for (let wall of walls) {
             if (wall.hits <= 10000) {
-                Game.notify("Activating safe mode "+wall.pos+ " Tick "+Game.time );
+                utils.notify("Activating safe mode "+wall.pos+ " Tick "+Game.time );
                 console.log("Activating safe mode "+wall.pos+ " Tick "+Game.time );
                 room.controller.activateSafeMode();
                 break;

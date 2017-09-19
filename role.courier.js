@@ -4,11 +4,11 @@ var roleCourier = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-    run: function(creep) {
+    run: function(creep,utils) {
         
          creep.say('c');
         utils.log("courier start");
-        if (_.filter(creep.room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'builder').length==0)
+        if (_.filter(creep.room.find (FIND_MY_CREEPS), (creep) => creep.memory.role == 'builder').length==0)
         {
              utils.log("check construct road");
             if ((creep.pos.x+creep.pos.y)%2==1)
@@ -21,15 +21,6 @@ var roleCourier = {
 	        creep.memory.loading = true;
 	        
 	        var source = utils.getStoredTarget(creep,'myLoadingTarget');
-	        // source = null;
-	        if (source == null)
-	        {
-                var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
-                if (links.length>1)
-                {
-                   // source = creep.pos.findClosestByPath(links);
-                }
-	        }
 	        if (source==null)
 	        {
 	            utils.log('find miner');
@@ -73,7 +64,7 @@ var roleCourier = {
             var target = utils.getStoredTarget(creep,'myTransferTarget');
             if (target==null)
             {
-                target = findCreepInNeed(creep)[0];
+                target = findCreepInNeed(creep,utils)[0];
             }
             
             utils.log('target '+target);
@@ -106,7 +97,7 @@ var roleCourier = {
 };
 
 
-function findCreepInNeed(creep)
+function findCreepInNeed(creep,utils)
 {
   // return utils.getCreepFromQueue(creep);
     utils.log('Start Find c.CreepInNeed Cpu Used '+Game.cpu.getUsed());
@@ -118,7 +109,7 @@ function findCreepInNeed(creep)
                            role = targetCreep.memory.role;
                         } 
 // utils.log('target role '+role +' energy '+targetCreep.carry.energy);
-                        return  ( creep.memory !=null && (role=='builder' || role=='upgrader'|| role=='builder')) && targetCreep.carry.energy < targetCreep.carryCapacity;
+                        return  (role=='builder' || role=='upgrader'|| role=='builder') && targetCreep.carry.energy < targetCreep.carryCapacity;
                     }});
 
     var leastEnergy = 10000000;

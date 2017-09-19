@@ -4,7 +4,7 @@ var roleExplorer = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-	run : function(creep) {
+	run : function(creep, utils) {
 
 		creep.say('e');
 		// creep.moveTo(Game.flags.ExploreRoom);

@@ -4,7 +4,7 @@ var roleHarvester = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-    run: function(creep) {
+    run: function(creep,utils) {
         creep.say('h');
         utils.log("h. "+creep.memory.action);
         

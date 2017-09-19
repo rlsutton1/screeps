@@ -10,7 +10,7 @@
 var roleMiner = require('role.miner');
 
 module.exports = {
-	run : function(room) {
+	run : function(room, utils) {
 
 		var roomsCreeps = room.find(FIND_MY_CREEPS);
 
@@ -19,11 +19,11 @@ module.exports = {
 			var creep = roomsCreeps[name];
 			try {
 
-				if (creep.memory && creep.memory.role == 'miner') {
-					roleMiner.run(creep);
+				if (creep.memory != null && creep.memory.role == 'miner') {
+					roleMiner.run(creep, utils);
 				}
 			} catch (err) {
-				Game.notify('miner ' + err, 60);
+				utils.notify('miner ' + err, 60);
 				utils.log(err);
 			}
 		}

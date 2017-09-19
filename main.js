@@ -4,6 +4,7 @@
 // WORK cost is 100
 // CARRY cost is 50
 
+var mySettings = null;
 mySettings =
     {
    
@@ -13,18 +14,18 @@ mySettings =
                 'roll':'defender',
                 'qty':1,
                 'bodyParts': [TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE],
-                'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
+                'condition': function(room){ return room.memory.underAttack==true}
             }, 
             {
                 'roll':'healer',
                 'qty':2,
                 'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE],
-                'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
+                'condition': function(room){ return room.memory.underAttack==true}
             },
             {
                 'roll':'healer',
                 'qty':1,
-                'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE]
+               'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE]
             },
             {
                 'roll':'harvester',
@@ -41,13 +42,13 @@ mySettings =
                 'roll':'miner',
                 'qty':4,
                 'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
-                'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
+                'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) => creep.memory.role == 'miner').length)}
             },
             {
                 'roll':'miner',
                 'qty':4,
                 'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
-                'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
+                'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) => creep.memory.role == 'miner').length)}
             },
             {
                 'roll':'miner',
@@ -58,7 +59,7 @@ mySettings =
                 'roll':'courier',
                 'qty':2,
                 'bodyParts': [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-                'condition': function(room){ return _.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length>=_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'courier').length}
+                'condition': function(room){ return _.filter(room.find (FIND_MY_CREEPS), (creep) => creep.memory.role == 'miner').length>=_.filter(room.find (FIND_MY_CREEPS), (creep) => creep.memory.role == 'courier').length}
 
             },
             {
@@ -68,13 +69,13 @@ mySettings =
             },
              {
                 'roll':'builder',
-                'qty':1,
+                'qty':2,
                 'bodyParts': [WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE],
                 'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length>0;}
             },
              {
                 'roll':'builder',
-                'qty':1,
+                'qty':2,
                 'bodyParts': [WORK,WORK,CARRY,MOVE],
                 'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length>0;}
             },
@@ -94,22 +95,22 @@ mySettings =
                 'roll':'explorer',
                 'qty':0,
                 'bodyParts': [CLAIM,WORK,CARRY,MOVE,MOVE],
-                'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null &&  creep.memory.role == 'explorer').length<1;}
+                'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory.role == 'explorer').length<1;}
             }
             ,
             {
                 'roll':'explorer',
                 'qty':0,
                 'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-                'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'explorer').length<2;}
+                'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory.role == 'explorer').length<2;}
             }     
         ]
     };
 
  
 
-utils = require('utils');
-highPriority = require('highPriority');
+var utils = require('utils');
+var highPriority = require('highPriority');
 
 utils.log('starting up');
 
@@ -124,24 +125,18 @@ utils.log('starting up');
         if (roomDefence == null){
             roomDefence = require('roomDefence');
         }
-        roomDefence.run(room);
+        roomDefence.run(room,utils);
     }
-    highPriority.run(room);
+    highPriority.run(room,utils);
 }
 
-if (Game.time % 1000 ==0){   
-    utils.log('start memory clear');
-    for(var name in Memory.creeps) {
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            utils.log('Clearing non-existing creep memory:', name);
-        }
-    }
-    utils.log('memory clear done');    
+if (Game.time % 100 ==0){  
+    require('lowPriority').run(utils);
+  
 }
 
 
-    var minBucket = 8500;
+    var minBucket = 9000;
 
     var t =Math.trunc( (Game.cpu.bucket-(minBucket-201)) / 100);
     if (t < 2)
@@ -171,7 +166,7 @@ var roomController = require('roomController');
 for(var room_it in Game.rooms) {
     var room = Game.rooms[room_it]
 
-    roomController.run(room,mySettings);
+    roomController.run(room,mySettings,utils);
     utils.log('room '+room);
 }
 
@@ -194,7 +189,6 @@ function doTowers(room)
     var closestHostile = room.find(FIND_HOSTILE_CREEPS);
  
         room.memory.underAttack = false;
-        room.memory.hasInvaders = false;
         room.memory.maxHp +=0.1;
         for (i in towers){
             var tower = towers[i];
@@ -224,11 +218,11 @@ function doTowers(room)
                     {
                         room.memory.underAttack = true;
                         console.log("Under attack "+matchedTarget.owner.name);
-                        Game.notify(room.name+' attackers detected from '+matchedTarget.owner.name,60);
+                        utils.notify(room.name+' attackers detected from '+matchedTarget.owner.name,60);
                     }else
                     {
-                        room.memory.hasInvaders = true;
-                        Game.notify(room.name+' invaders detected',60);
+                        console.log(room.name+' invaders detected');
+                        utils.notify(room.name+' invaders detected',60);
                     }
                     tower.attack(matchedTarget);
                     done =true;

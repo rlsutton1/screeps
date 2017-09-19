@@ -7,9 +7,16 @@
  * mod.thing == 'a thing'; // true
  */
 
-loghistory = '';
+var loghistory = '';
 
-module.exports = {
+var logf = function(value)
+{
+    var message = 'Cpu Used '+Game.cpu.getUsed()+" "+value;
+    loghistory += message+'\n';
+    console.log(message);
+}
+
+var utilz = {
 
 findClosestSource: function(creep)
 {
@@ -22,17 +29,17 @@ findClosest: function(creep, sourceType)
 {
     var sources = creep.room.find(sourceType);
     var closest = creep.pos.findClosestByPath(sources);
-    module.exports.log('closets is '+closest);
+    logf('closets is '+closest);
     return closest;
 },
 
 findMiner: function(creep)
 {
-     module.exports.log('Start Find Miner Cpu Used '+Game.cpu.getUsed());
+     logf('Start Find Miner Cpu Used '+Game.cpu.getUsed());
 
     var candidates = creep.room.find(FIND_CREEPS, {
                     filter: (targetCreep) => {
-                        return   targetCreep.memory !=null && targetCreep.memory.role=='miner' && targetCreep.energy == targetCreep.energyCapacity;
+                        return  targetCreep.memory.role=='miner' && targetCreep.energy == targetCreep.energyCapacity;
                     }})
                     
     var mostEnergy = 0;
@@ -46,7 +53,7 @@ findMiner: function(creep)
             candidate = t;
         }
     }
-     module.exports.log('End FInd Miner Cpu Used '+Game.cpu.getUsed());
+    logf('End FInd Miner Cpu Used '+Game.cpu.getUsed());
 
     return [candidate];
 },
@@ -54,7 +61,7 @@ findMiner: function(creep)
 getStoredTarget: function(creep,token)
 {
     
-	module.exports.log('getting stored target '+creep.memory[token]);
+	logf('getting stored target '+creep.memory[token]);
     return Game.getObjectById(creep.memory[token]);
 },
 
@@ -71,15 +78,21 @@ storeTarget: function(creep,token,target)
 },
 log: function(value)
 {
-    var message = 'Cpu Used '+Game.cpu.getUsed()+" "+value;
-    loghistory += message+'\n';
-   // console.log(message);
+   logf(value);
 },
 emailLogs: function()
 {
   console.log(loghistory);  
 },
-
+notify: function(message)
+{
+    if (Game.bucket !=null) {
+        Game.notify(message,60); 
+    }else
+    {
+        console.log('Notify: '+message);
+    }
+},
 chooseMiner: function(creep)
 {
     console.log('chooseMiner for '+creep.id);
@@ -87,7 +100,7 @@ chooseMiner: function(creep)
     // creep.memory.miner = null;
     if (creep.memory.miner)
     {
-        ret = Game.getObjectById(creep.memory.miner);
+        var ret = Game.getObjectById(creep.memory.miner);
         if (ret)
         {
             // return the stored miner
@@ -98,7 +111,7 @@ chooseMiner: function(creep)
     // get the list of miners
     var candidates = creep.room.find(FIND_CREEPS, {
         filter: (targetCreep) => {
-            return  targetCreep.memory !=null && targetCreep.memory.role=='miner';
+            return targetCreep.memory && targetCreep.memory.role=='miner';
         }})
     
   
@@ -135,3 +148,5 @@ chooseMiner: function(creep)
 
 
 };
+
+module.exports = utilz;
