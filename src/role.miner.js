@@ -33,6 +33,19 @@ var roleMiner = {
                 }
 
             }
+        }else
+        {
+        	if (creep.carry.energy > creep.carryCapacity/2.0){
+                var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
+                if (links.length>1)
+                {
+                    for (var i in links)
+                    {
+                        var link = links[i];
+                        creep.transfer(link,RESOURCE_ENERGY,creep.carry.energy - creep.carryCapacity/2.0);
+                    }
+                }
+            }
         }
 	}
 };

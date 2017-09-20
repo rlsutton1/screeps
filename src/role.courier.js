@@ -48,7 +48,7 @@ var roleCourier = {
 	            if (source.structureType)
 	            {
 	            	
-	            	var result = creep.withdraw(source);
+	            	var result = creep.withdraw(source,RESOURCE_ENERGY);
 	            	console.log("Trying to withdraw, result: "+result);
 	                if (result == ERR_NOT_IN_RANGE)
 	                {
