@@ -21,13 +21,14 @@ var roleCourier = {
 	        creep.memory.loading = true;
 	        
 	        var source = utils.getStoredTarget(creep,'myLoadingTarget');
-	        // source = null;
+	        source = null;
 	        if (source == null)
 	        {
                 var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
                 if (links.length>1)
                 {
-                   // source = creep.pos.findClosestByPath(links);
+                   source = creep.pos.findClosestByPath(links);
+                   console.log("using link as source");
                 }
 	        }
 	        if (source==null)
@@ -43,12 +44,17 @@ var roleCourier = {
 	        
 	        if (source)
 	        {
+	        	console.log("source type "+source.structureType);
 	            if (source.structureType)
 	            {
-	                if (creep.withdraw(source) == ERR_NOT_IN_RANGE)
+	            	
+	            	var result = creep.withdraw(source);
+	            	console.log("Trying to withdraw, result: "+result);
+	                if (result == ERR_NOT_IN_RANGE)
 	                {
-	                utils.storeTarget(creep,'myLoadingTarget',source);
-                    creep.moveTo(source, {reusePath: 10});
+	                	
+	                	utils.storeTarget(creep,'myLoadingTarget',source);
+	                	creep.moveTo(source, {reusePath: 10});
 	                }
 	            }else if(source.transfer(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 	                utils.storeTarget(creep,'myLoadingTarget',source);
