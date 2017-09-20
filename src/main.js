@@ -80,7 +80,7 @@ mySettings =
             },
             {
                 'roll':'upgrader',
-                'qty':1,
+                'qty':2,
                 'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE],
                 'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length==0;}
 
