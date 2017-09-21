@@ -35,7 +35,7 @@ var roleUpgrader = {
                     creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
                 }
             }
-        }
+        } 
         
         if (targets.length > 0 && creep.carry.energy == 0)
     	{

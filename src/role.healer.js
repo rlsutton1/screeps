@@ -20,7 +20,7 @@ var roleHealer = {
         }
         if (defender !=null) {
             utils.storeTarget(creep,'defenderTarget',defender);
-            if(creep.heal(defender) == ERR_NOT_IN_RANGE) {
+            if(creep.rangedHeal(defender) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(defender, {reusePath: 10});
             }
         }

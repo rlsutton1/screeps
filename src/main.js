@@ -12,19 +12,19 @@ mySettings =
             {
                 'roll':'defender',
                 'qty':1,
-                'bodyParts': [TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE],
+                'bodyParts': [TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE],
                 'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
             }, 
             {
                 'roll':'healer',
                 'qty':2,
-                'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE],
+                'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE],
                 'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
             },
             {
                 'roll':'healer',
                 'qty':1,
-                'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE]
+                'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE]
             },
             {
                 'roll':'harvester',
