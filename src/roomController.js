@@ -140,7 +140,6 @@ run:function (room,mySettings,utils) {
                         roleHealer.run(creep,utils);
                     }
                 }
-                a.fer();
             }
             catch (err)
             {
