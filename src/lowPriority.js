@@ -45,31 +45,33 @@ module.exports = {
 				}
 			});
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
-			var pos = spawn.pos;
-			var ctr = 0;
-			for (var x = 0; x < 5; x++) {
-				for (var y = 0; y < 5; y++) {
-					if (Math.abs(x + y) > 1) {
-						if (createMoreExtensions(ctr, extensions, exts, room)) {
-							return;
-						}
-						ctr += createExtension(room, pos.x + x, pos.y + y,
+			if (spawn !=null){
+				var pos = spawn.pos;
+				var ctr = 0;
+				for (var x = 0; x < 5; x++) {
+					for (var y = 0; y < 5; y++) {
+						if (Math.abs(x + y) > 1) {
+							if (createMoreExtensions(ctr, extensions, exts, room)) {
+								return;
+							}
+							ctr += createExtension(room, pos.x + x, pos.y + y,
 								utils);
-						if (createMoreExtensions(ctr, extensions, exts, room)) {
-							return;
-						}
-						ctr += createExtension(room, pos.x - x, pos.y + y,
+							if (createMoreExtensions(ctr, extensions, exts, room)) {
+								return;
+							}
+							ctr += createExtension(room, pos.x - x, pos.y + y,
 								utils);
-						if (createMoreExtensions(ctr, extensions, exts, room)) {
-							return;
-						}
-						ctr += createExtension(room, pos.x + x, pos.y - y,
+							if (createMoreExtensions(ctr, extensions, exts, room)) {
+								return;
+							}
+							ctr += createExtension(room, pos.x + x, pos.y - y,
 								utils);
-						if (createMoreExtensions(ctr, extensions, exts, room)) {
-							return;
-						}
-						ctr += createExtension(room, pos.x - x, pos.y - y,
+							if (createMoreExtensions(ctr, extensions, exts, room)) {
+								return;
+							}
+							ctr += createExtension(room, pos.x - x, pos.y - y,
 								utils);
+						}
 					}
 				}
 			}
