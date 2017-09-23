@@ -140,13 +140,13 @@ run:function (room,mySettings,utils) {
                         roleHealer.run(creep,utils);
                     }
                 }
+                aalert('');
             }
             catch (err)
             {
-                Game.notify(err,60);
-                utils.log(err);
-                console.log(err);
-                // throw err;
+            	var msg = err.name + ': ' + err.message;
+                utils.notify(msg,60);
+                utils.log(msg);
             }
         }
     
