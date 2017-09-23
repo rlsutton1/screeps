@@ -10,95 +10,95 @@ var mySettings =
         creepBuildList:
         [
             {
-                'roll':'defender',
+                'role':'defender',
                 'qty':1,
                 'bodyParts': [TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE],
                 'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
             }, 
             {
-                'roll':'healer',
+                'role':'healer',
                 'qty':2,
                 'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE],
                 'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
             },
             {
-                'roll':'healer',
+                'role':'healer',
                 'qty':1,
                 'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE]
             },
             {
-                'roll':'harvester',
+                'role':'harvester',
                 'qty':2,
                 'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
 
             },
             {
-                'roll':'harvester',
+                'role':'harvester',
                 'qty':2,
                 'bodyParts': [WORK,WORK,CARRY,MOVE],
             },
             {
-                'roll':'miner',
+                'role':'miner',
                 'qty':4,
                 'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
                 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
             },
             {
-                'roll':'miner',
+                'role':'miner',
                 'qty':4,
                 'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
                 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
             },
             {
-                'roll':'miner',
+                'role':'miner',
                 'qty':2,
                 'bodyParts': [WORK,WORK,CARRY,MOVE]
             },
             {
-                'roll':'courier',
+                'role':'courier',
                 'qty':2,
                 'bodyParts': [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                 'condition': function(room){ return _.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length>=_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'courier').length}
 
             },
             {
-                'roll':'courier',
+                'role':'courier',
                 'qty':2,
                 'bodyParts': [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]
             },
              {
-                'roll':'builder',
+                'role':'builder',
                 'qty':1,
                 'bodyParts': [WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE],
                 'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length>0;}
             },
              {
-                'roll':'builder',
+                'role':'builder',
                 'qty':1,
                 'bodyParts': [WORK,WORK,CARRY,MOVE],
                 'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length>0;}
             },
             {
-                'roll':'upgrader',
+                'role':'upgrader',
                 'qty':2,
                 'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE],
                 'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length==0;}
 
             },
             {
-                'roll':'upgrader',
+                'role':'upgrader',
                 'qty':1,
                 'bodyParts': [WORK,WORK,CARRY,MOVE],
             },
             {
-                'roll':'explorer',
+                'role':'explorer',
                 'qty':0,
                 'bodyParts': [CLAIM,WORK,CARRY,MOVE,MOVE],
                 'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null &&  creep.memory.role == 'explorer').length<1;}
             }
             ,
             {
-                'roll':'explorer',
+                'role':'explorer',
                 'qty':0,
                 'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
                 'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'explorer').length<2;}

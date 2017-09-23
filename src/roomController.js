@@ -62,13 +62,13 @@ run:function (room,mySettings,utils) {
   
         var spawn = room.find(FIND_MY_SPAWNS)[0];
         if (spawn){
-            for (var roll in mySettings['creepBuildList'])
+            for (var role in mySettings['creepBuildList'])
             {
-                var buildInfo = mySettings['creepBuildList'][roll];
+                var buildInfo = mySettings['creepBuildList'][role];
          
-                var creeps = _.filter(roomsCreeps, (creep) =>  creep.memory !=null && creep.memory.role == buildInfo['roll']);
+                var creeps = _.filter(roomsCreeps, (creep) =>  creep.memory !=null && creep.memory.role == buildInfo['role']);
        
-              // utils.log(buildInfo['roll']+' in existance: '+
+              // utils.log(buildInfo['role']+' in existance: '+
 				// creeps.length+'/'+buildInfo.qty);
        
                 var condition = buildInfo.condition;
@@ -80,16 +80,16 @@ run:function (room,mySettings,utils) {
        
                 if(creeps.length <buildInfo.qty && shouldBuild) 
                 {
-                    var newName = spawn.createCreep(buildInfo.bodyParts, undefined, {role: buildInfo['roll']});
+                    var newName = spawn.createCreep(buildInfo.bodyParts, undefined, {role: buildInfo['role']});
                     if (newName.length>2)
                     {
-                        utils.log('Spawning new '+ buildInfo['roll']+': ' + newName);
+                        utils.log('Spawning new '+ buildInfo['role']+': ' + newName);
                         utils.log("qty "+buildInfo.qty);
                         utils.log("bodyParts "+buildInfo.bodyParts);
                         break;
                     }else
                     {
-                        utils.log("Not spawning "+buildInfo['roll']+" due to "+newName);
+                        utils.log("Not spawning "+buildInfo['role']+" due to "+newName);
                     }
                 }
             }
