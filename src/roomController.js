@@ -145,8 +145,8 @@ run:function (room,mySettings,utils) {
             catch (err)
             {
             	utils.storeException(err);
-                utils.notify(msg,60);
-                utils.log(msg);
+                utils.notify(err,60);
+                utils.log(err);
             }
         }
     
