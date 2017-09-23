@@ -16,6 +16,8 @@ var logf = function(value)
     console.log(message);
 }
 
+var lastException = null;
+
 var utilz = {
 
 findClosestSource: function(creep)
@@ -32,7 +34,16 @@ findClosest: function(creep, sourceType)
     logf('closets is '+closest);
     return closest;
 },
-
+storeException(exception)
+{
+	lastException = exception;
+},
+dumpLastException(exception)
+{
+	if (lastException !=null){
+		throw lastException;
+	}
+},
 findMiner: function(creep)
 {
      logf('Start Find Miner Cpu Used '+Game.cpu.getUsed());

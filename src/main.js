@@ -179,6 +179,8 @@ for(var room_it in Game.rooms) {
     }
 
     console.log('Cpu Used '+Game.cpu.getUsed()+ " "+Game.cpu.bucket);
+    
+    utils.dumpLastException();
 
 
 function doTowers(room)

@@ -140,11 +140,11 @@ run:function (room,mySettings,utils) {
                         roleHealer.run(creep,utils);
                     }
                 }
-                aalert('');
+                a.fer();
             }
             catch (err)
             {
-            	var msg = err.name + ': ' + err.message;
+            	utils.storeException(err);
                 utils.notify(msg,60);
                 utils.log(msg);
             }
