@@ -79,7 +79,7 @@ storeTarget: function(creep,token,target)
 log: function(value)
 {
     var message = 'Cpu Used '+Game.cpu.getUsed()+" "+value;
-    logf( message+'\n');
+    logf( message);
    // console.log(message);
 },
 emailLogs: function()
