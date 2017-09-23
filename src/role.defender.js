@@ -8,7 +8,7 @@
  */
 
 var roleDefender = {
-	run : function(creep) {
+	run : function(creep, utils) {
 
 		console.log('running defender');
 		creep.say('d');

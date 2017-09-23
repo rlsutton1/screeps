@@ -19,7 +19,7 @@ module.exports = {
     
 
 
-run:function (room,mySettings) {
+run:function (room,mySettings,utils) {
 
 
 
@@ -120,24 +120,24 @@ run:function (room,mySettings) {
                 if ( creep.memory !=null && creep.fatigue<= 0)
                 {
                     if(creep.memory.role == 'harvester') {
-                        roleHarvester.run(creep);
+                        roleHarvester.run(creep,utils);
                     }
                     if(creep.memory.role == 'upgrader') {
-                        roleUpgrader.run(creep);
+                        roleUpgrader.run(creep,utils);
                     }
                     if(creep.memory.role == 'builder') {
-                        roleBuilder.run(creep);
+                        roleBuilder.run(creep,utils);
                     }
                     if (creep.memory.role == 'courier')
                     {   
-                        roleCourier.run(creep);
+                        roleCourier.run(creep,utils);
                     }
                     if (creep.memory.role=='explorer')
                     {
-                        roleExplorer.run(creep);
+                        roleExplorer.run(creep,utils);
                     }
                     if(creep.memory.role == 'healer') {
-                        roleHealer.run(creep);
+                        roleHealer.run(creep,utils);
                     }
                 }
             }

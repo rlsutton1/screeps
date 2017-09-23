@@ -4,7 +4,7 @@
 // WORK cost is 100
 // CARRY cost is 50
 
-mySettings =
+var mySettings =
     {
    
         creepBuildList:
@@ -109,8 +109,8 @@ mySettings =
  
 // test pull 
 
-utils = require('utils');
-highPriority = require('highPriority');
+var utils = require('utils');
+var highPriority = require('highPriority');
 
 utils.log('starting up');
 
@@ -125,20 +125,14 @@ utils.log('starting up');
         if (roomDefence == null){
             roomDefence = require('roomDefence');
         }
-        roomDefence.run(room);
+        roomDefence.run(room,utils);
     }
-    highPriority.run(room);
+    highPriority.run(room,utils);
 }
 
-if (Game.time % 1000 ==0){   
-    utils.log('start memory clear');
-    for(var name in Memory.creeps) {
-        if(!Game.creeps[name]) {
-            delete Memory.creeps[name];
-            utils.log('Clearing non-existing creep memory:', name);
-        }
-    }
-    utils.log('memory clear done');    
+if (Game.time % 100 ==0){  
+    require('lowPriority').run(utils);
+  
 }
 
 
@@ -172,7 +166,7 @@ var roomController = require('roomController');
 for(var room_it in Game.rooms) {
     var room = Game.rooms[room_it]
 
-    roomController.run(room,mySettings);
+    roomController.run(room,mySettings,utils);
     utils.log('room '+room);
 }
 
@@ -225,12 +219,13 @@ function doTowers(room)
                     {
                         room.memory.underAttack = true;
                         console.log("Under attack "+matchedTarget.owner.name);
-                        Game.notify(room.name+' attackers detected from '+matchedTarget.owner.name,60);
+                        utils.notify(room.name+' attackers detected from '+matchedTarget.owner.name,60);
                     }else
                     {
                         room.memory.hasInvaders = true;
-                        Game.notify(room.name+' invaders detected',60);
-                    }
+                        console.log(room.name+' invaders detected');
+                        utils.notify(room.name+' invaders detected',60);
+                   }
                     tower.attack(matchedTarget);
                     done =true;
                 }

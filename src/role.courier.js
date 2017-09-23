@@ -4,7 +4,7 @@ var roleCourier = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-    run: function(creep) {
+    run: function(creep,utils) {
         
          creep.say('c');
         utils.log("courier start");
@@ -79,7 +79,7 @@ var roleCourier = {
             var target = utils.getStoredTarget(creep,'myTransferTarget');
             if (target==null)
             {
-                target = findCreepInNeed(creep)[0];
+                target = findCreepInNeed(creep,utils)[0];
             }
             
             utils.log('target '+target);
@@ -112,7 +112,7 @@ var roleCourier = {
 };
 
 
-function findCreepInNeed(creep)
+function findCreepInNeed(creep,utils)
 {
   // return utils.getCreepFromQueue(creep);
     utils.log('Start Find c.CreepInNeed Cpu Used '+Game.cpu.getUsed());

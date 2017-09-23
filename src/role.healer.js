@@ -9,7 +9,7 @@
 
 
 var roleHealer = {
-    run: function(creep) {
+    run: function(creep,utils) {
         creep.say('hh');
 // console.log("healer");
         

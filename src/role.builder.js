@@ -4,7 +4,7 @@ var roleBuilder = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-	run : function(creep) {
+	run : function(creep, utils) {
 
 		creep.say('b');
 		utils.log("b.");

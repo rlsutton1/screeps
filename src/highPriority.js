@@ -11,7 +11,7 @@ var roleMiner = require('role.miner');
 var roleDefender = require('role.defender');
 
 module.exports = {
-	run : function(room) {
+	run : function(room, utils) {
 
 		var roomsCreeps = room.find(FIND_MY_CREEPS);
 
@@ -20,14 +20,15 @@ module.exports = {
 			var creep = roomsCreeps[name];
 			try {
 
-				if (creep.memory && creep.memory.role == 'miner') {
-					roleMiner.run(creep);
+				if (creep.memory != null && creep.memory.role == 'miner') {
+					roleMiner.run(creep, utils);
 				}
-					if (creep.memory && creep.memory.role == 'defender') {
-					roleDefender.run(creep);
+	
+				if (creep.memory != null && creep.memory.role == 'defender') {
+					roleDefender.run(creep,utils);
 				}
 			} catch (err) {
-				Game.notify('miner ' + err, 60);
+				utils.notify('miner ' + err, 60);
 				utils.log(err);
 			}
 		}

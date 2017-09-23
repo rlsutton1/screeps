@@ -4,7 +4,7 @@ var roleUpgrader = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-    run: function(creep) {
+    run: function(creep,utils) {
         creep.say('u');
         utils.log("u.");
         

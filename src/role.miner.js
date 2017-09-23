@@ -4,7 +4,7 @@ var roleMiner = {
 	 * @param {Creep}
 	 *            creep *
 	 */
-    run: function(creep) {
+    run: function(creep,utils) {
         utils.log("m.");
         creep.say('m');
         if (creep.carry.energy < creep.carryCapacity)
