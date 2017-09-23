@@ -28,6 +28,7 @@ module.exports = {
 					roleDefender.run(creep,utils);
 				}
 			} catch (err) {
+				utils.storeException(err);
 				utils.notify('miner ' + err, 60);
 				utils.log(err);
 			}

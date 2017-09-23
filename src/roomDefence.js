@@ -31,7 +31,8 @@ module.exports = {
             }
             catch (err)
             {
-                Game.notify('defence: '+err,60);
+            	utils.storeException(err);
+                utils.notify('defence: '+err,60);
                 utils.log(err);
             }
         }
