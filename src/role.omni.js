@@ -170,4 +170,4 @@ var roleOmni = {
     }
 }
 
-module.exports = roleDefender;
+module.exports = roleOmni;
