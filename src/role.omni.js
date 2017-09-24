@@ -32,7 +32,7 @@ function chooseEnergySource(creep,utils)
         creep.memory.sourceType = 'miner';
     	return;
     }
-    source = utils.findClosestSource(crrep);
+    source = utils.findClosestSource(creep);
     if (source !=null)
     {
     	utils.storeTarget(creep,'source',source);
