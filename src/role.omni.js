@@ -89,6 +89,8 @@ function chooseTarget(creep,utils)
 		creep.memory.targetType = 'tower';
         return;
     }
+    utils.storeTarget(creep,'target',creep.room.controller);
+    creep.memory.targetType = 'controller';
 	
 }
 
@@ -109,6 +111,12 @@ function deliver(creep,utils)
     	}
     	return;
     }
+	if (creep.memory.targetType == 'controller'){
+		 if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
+             creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+         }
+	   	return;
+	}
     if (creep.memory.targetType == 'spawn'){
     	if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(target, {reusePath: 10});
