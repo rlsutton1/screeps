@@ -29,7 +29,7 @@ var mySettings =
             {
                 'role':'omni',
                 'qty':3,
-                'bodyParts': [WORK,WORK,CARRY,MOVE],
+                'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]
 
             },
             {
@@ -37,12 +37,14 @@ var mySettings =
                 'qty':3,
                 'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
 
-            },{
+            },
+            {
                 'role':'omni',
                 'qty':3,
-                'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]
+                'bodyParts': [WORK,WORK,CARRY,MOVE],
 
             },
+            
             {
                 'role':'miner',
                 'qty':4,
