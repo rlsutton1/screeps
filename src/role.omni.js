@@ -94,7 +94,9 @@ function chooseTarget(creep,utils)
 
 function deliver(creep,utils)
 {
-    var target = chooseTarget(creep,utils);
+    chooseTarget(creep,utils);
+	var target = utils.getStoredTarget(creep,'target');
+
     if (creep.memory.targetType = 'construct'){
     	if (creep.build(target) == ERR_NOT_IN_RANGE) {
 			creep.moveTo(target, {
@@ -123,7 +125,8 @@ function deliver(creep,utils)
 
 function load(creep,utils)
 {
-	var source = chooseEnergySource(creep,utils);
+	chooseEnergySource(creep,utils);
+	var source = utils.getStoredTarget(creep,'source');
 	console.log(creep.memory.sourceType+" at "+source);
 	if (creep.memory.sourceType =='link') {
 		var result = creep.withdraw(source,RESOURCE_ENERGY);
