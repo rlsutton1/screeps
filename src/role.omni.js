@@ -124,7 +124,7 @@ function deliver(creep,utils)
 function load(creep,utils)
 {
 	var source = chooseEnergySource(creep,utils);
-	console.log(creep.memory.sourceType+" at "+source.pos);
+	console.log(creep.memory.sourceType+" at "+source);
 	if (creep.memory.sourceType =='link') {
 		var result = creep.withdraw(source,RESOURCE_ENERGY);
 		console.log('withdraw result '+result);
