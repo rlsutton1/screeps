@@ -171,10 +171,13 @@ var roleOmni = {
         console.log('running omni');
         if (creep.memory.mode == null || creep.carry.energy == 0){
         	creep.memory.mode = 'load';
+        	creep.memory.target = null;
+        	
         }
         if (creep.carry.energy == creep.carryCapacity)
 		{
         	creep.memory.mode = 'deliver';
+        	creep.memory.source = null;
 		}
 
         console.log('o '+creep.memory.mode);
@@ -182,13 +185,11 @@ var roleOmni = {
         
         if (creep.memory.mode == 'deliver'){
             creep.say('o '+creep.memory.targetType);
-        	chooseTarget(creep,utils);
         	deliver(creep,utils);
         }
         if (creep.memory.mode == 'load'){
             creep.say('o '+creep.memory.sourceType);
             console.log('calling load ');
-        	chooseEnergySource(creep,utils);
         	load(creep,utils);
         }
     }

@@ -28,20 +28,20 @@ var mySettings =
             },
             {
                 'role':'omni',
-                'qty':1,
-                'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
-
-            },
-            {
-                'role':'harvester',
-                'qty':2,
-                'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
-
-            },
-            {
-                'role':'harvester',
-                'qty':2,
+                'qty':3,
                 'bodyParts': [WORK,WORK,CARRY,MOVE],
+
+            },
+            {
+                'role':'omni',
+                'qty':3,
+                'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
+
+            },{
+                'role':'omni',
+                'qty':3,
+                'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE]
+
             },
             {
                 'role':'miner',
@@ -59,42 +59,6 @@ var mySettings =
                 'role':'miner',
                 'qty':2,
                 'bodyParts': [WORK,WORK,CARRY,MOVE]
-            },
-            {
-                'role':'courier',
-                'qty':2,
-                'bodyParts': [CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-                'condition': function(room){ return _.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length>=_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'courier').length}
-
-            },
-            {
-                'role':'courier',
-                'qty':2,
-                'bodyParts': [CARRY,CARRY,CARRY,CARRY,MOVE,MOVE]
-            },
-             {
-                'role':'builder',
-                'qty':1,
-                'bodyParts': [WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE],
-                'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length>0;}
-            },
-             {
-                'role':'builder',
-                'qty':1,
-                'bodyParts': [WORK,WORK,CARRY,MOVE],
-                'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length>0;}
-            },
-            {
-                'role':'upgrader',
-                'qty':2,
-                'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE],
-                'condition': function(room){return room.find(FIND_CONSTRUCTION_SITES).length==0;}
-
-            },
-            {
-                'role':'upgrader',
-                'qty':1,
-                'bodyParts': [WORK,WORK,CARRY,MOVE],
             },
             {
                 'role':'explorer',

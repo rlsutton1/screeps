@@ -8,10 +8,10 @@
  */
 
 
-var roleHarvester = require('role.harvester');
-var roleUpgrader = require('role.upgrader');
-var roleBuilder = require('role.builder');
-var roleCourier = require('role.courier');
+var roleHarvester = null;// require('role.harvester');
+var roleUpgrader = null;//require('role.upgrader');
+var roleBuilder = null;//require('role.builder');
+var roleCourier = null;//require('role.courier');
 var roleExplorer = require('role.explorer');
 var roleHealer = require('role.healer');
 var roleOmni = require('role.omni');
