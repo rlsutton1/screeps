@@ -169,6 +169,10 @@ var roleOmni = {
     run: function(creep,utils) {
         
         console.log('running omni');
+        if ((creep.pos.x+creep.pos.y)%2==1)
+        {
+            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+        }
         if (creep.memory.mode == null || creep.carry.energy == 0){
         	creep.memory.mode = 'load';
         	creep.memory.target = null;
