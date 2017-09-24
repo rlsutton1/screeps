@@ -149,7 +149,6 @@ var roleOmni = {
     run: function(creep,utils) {
         
         console.log('running omni');
-        creep.say('o');
         if (creep.memory.mode == null || creep.carry.energy == 0){
         	creep.memory.mode = 'load';
         }
@@ -157,6 +156,10 @@ var roleOmni = {
 		{
         	creep.memory.mode = 'deliver';
 		}
+
+        creep.say('o '+creep.memory.mode);
+
+        
         if (creep.memory.mode == 'load'){
         	chooseTarget(creep,utils);
         	if (deliver(creep,utils)){
