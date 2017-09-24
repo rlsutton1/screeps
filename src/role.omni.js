@@ -68,13 +68,7 @@ function chooseTarget(creep,utils)
         return;
     }
 	
-	target = utils.findClosest(creep, FIND_CONSTRUCTION_SITES);
-	if (target !=null)
-	{
-		utils.storeTarget(creep, 'target', target);
-		creep.memory.targetType = 'construct';
-		return;
-	}
+
     
     var targets = creep.room.find(FIND_STRUCTURES, {
         filter: (structure) => {
@@ -89,7 +83,15 @@ function chooseTarget(creep,utils)
 		creep.memory.targetType = 'tower';
         return;
     }
-    utils.storeTarget(creep,'target',creep.room.controller);
+	target = utils.findClosest(creep, FIND_CONSTRUCTION_SITES);
+	if (target !=null)
+	{
+		utils.storeTarget(creep, 'target', target);
+		creep.memory.targetType = 'construct';
+		return;
+	}
+	
+	utils.storeTarget(creep,'target',creep.room.controller);
     creep.memory.targetType = 'controller';
 	
 }
