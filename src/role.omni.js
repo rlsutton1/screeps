@@ -127,6 +127,7 @@ function load(creep,utils)
 	var source = chooseEnergySource(creep,utils);
 	if (creep.memory.sourceType =='link') {
 		var result = creep.withdraw(source,RESOURCE_ENERGY);
+		console.log('withdraw result '+result);
         if (result == ERR_NOT_IN_RANGE) {
         	creep.moveTo(source, {reusePath: 10});
         }
