@@ -28,7 +28,7 @@ var mySettings =
             },
             {
                 'role':'omni',
-                'qty':3,
+                'qty':4,
                 'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
             	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
 
