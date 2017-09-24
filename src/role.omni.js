@@ -162,9 +162,7 @@ var roleOmni = {
         
         if (creep.memory.mode == 'load'){
         	chooseTarget(creep,utils);
-        	if (deliver(creep,utils)){
-        		creep.memory.mode='deliver';
-        	}
+        	deliver(creep,utils);
         }
         if (creep.memory.mode == 'deliver'){
         	chooseEnergySource(creep,utils);
