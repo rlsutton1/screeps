@@ -177,15 +177,16 @@ var roleOmni = {
         	creep.memory.mode = 'deliver';
 		}
 
-        creep.say('o '+creep.memory.mode);
         console.log('o '+creep.memory.mode);
 
         
         if (creep.memory.mode == 'deliver'){
+            creep.say('o '+creep.memory.targetType);
         	chooseTarget(creep,utils);
         	deliver(creep,utils);
         }
         if (creep.memory.mode == 'load'){
+            creep.say('o '+creep.memory.sourceType);
             console.log('calling load ');
         	chooseEnergySource(creep,utils);
         	load(creep,utils);
