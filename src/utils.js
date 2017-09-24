@@ -99,7 +99,7 @@ emailLogs: function()
 },
 notify: function(message)
 {
-    if (Game.bucket !=null) {
+    if (Game.cpu !=null) {
         Game.notify(message,60); 
     }else
     {
