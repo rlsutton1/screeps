@@ -158,7 +158,7 @@ function load(creep,utils)
 		return;
 	}
 	if (creep.memory.sourceType =='source') {
-		if(source.harvest(source) == ERR_NOT_IN_RANGE) {
+		if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
 			creep.moveTo(source, {reusePath: 10});
 		}
 		return;
