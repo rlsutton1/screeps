@@ -96,6 +96,8 @@ function deliver(creep,utils)
 {
     chooseTarget(creep,utils);
 	var target = utils.getStoredTarget(creep,'target');
+	
+	console.log('target is 'creep.memory.targetType+" "+target)
 
     if (creep.memory.targetType = 'construct'){
     	if (creep.build(target) == ERR_NOT_IN_RANGE) {
