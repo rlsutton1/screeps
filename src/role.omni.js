@@ -88,12 +88,13 @@ function chooseTarget(creep,utils)
 	{
 		utils.storeTarget(creep, 'target', target);
 		creep.memory.targetType = 'construct';
-		return;
+		// fall through to a room controller check
 	}
-	
-	utils.storeTarget(creep,'target',creep.room.controller);
-    creep.memory.targetType = 'controller';
-	
+	if (target == null  || creep.room.controller.ticksToDowngrade < 1000)
+	{
+		utils.storeTarget(creep,'target',creep.room.controller);
+		creep.memory.targetType = 'controller';
+	}
 }
 
 function deliver(creep,utils)
