@@ -14,7 +14,7 @@ var roleBuilder = require('role.builder');
 var roleCourier = require('role.courier');
 var roleExplorer = require('role.explorer');
 var roleHealer = require('role.healer');
-var roleHealer = require('role.omni');
+var roleOmni = require('role.omni');
 
 module.exports = {
     
