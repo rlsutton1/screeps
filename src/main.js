@@ -27,6 +27,12 @@ var mySettings =
                 'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE]
             },
             {
+                'role':'omni',
+                'qty':1,
+                'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
+
+            },
+            {
                 'role':'harvester',
                 'qty':2,
                 'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],

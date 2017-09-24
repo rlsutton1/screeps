@@ -14,6 +14,7 @@ var roleBuilder = require('role.builder');
 var roleCourier = require('role.courier');
 var roleExplorer = require('role.explorer');
 var roleHealer = require('role.healer');
+var roleHealer = require('role.omni');
 
 module.exports = {
     
@@ -138,6 +139,9 @@ run:function (room,mySettings,utils) {
                     }
                     if(creep.memory.role == 'healer') {
                         roleHealer.run(creep,utils);
+                    }
+                    if(creep.memory.role == 'omni') {
+                        roleOmni.run(creep,utils);
                     }
                 }
             }
