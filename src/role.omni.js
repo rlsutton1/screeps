@@ -97,9 +97,9 @@ function deliver(creep,utils)
     chooseTarget(creep,utils);
 	var target = utils.getStoredTarget(creep,'target');
 	
-	console.log('target is '+creep.memory.targetType+" "+target)
+	console.log('deliver: target is '+creep.memory.targetType+" "+target)
 
-    if (creep.memory.targetType = 'construct'){
+    if (creep.memory.targetType == 'construct'){
     	if (creep.build(target) == ERR_NOT_IN_RANGE) {
 			creep.moveTo(target, {
 				visualizePathStyle : {
@@ -109,15 +109,20 @@ function deliver(creep,utils)
     	}
     	return;
     }
-    if (creep.memory.targetType = 'spawn'){
+    if (creep.memory.targetType == 'spawn'){
     	if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(target, {reusePath: 10});
+    	}else {
+    	    creep.memory.target = null;
     	}
     	return;
     }
-    if (creep.memory.targetType = 'tower'){
+    if (creep.memory.targetType == 'tower'){
     	if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(target, {reusePath: 10});
+    	}else
+    	{
+        	creep.memory.target = null;
     	}
     	return;
     }
@@ -165,6 +170,7 @@ var roleOmni = {
 		}
 
         creep.say('o '+creep.memory.mode);
+        console.log('o '+creep.memory.mode);
 
         
         if (creep.memory.mode == 'deliver'){
@@ -172,6 +178,7 @@ var roleOmni = {
         	deliver(creep,utils);
         }
         if (creep.memory.mode == 'load'){
+            console.log('calling load ');
         	chooseEnergySource(creep,utils);
         	load(creep,utils);
         }
