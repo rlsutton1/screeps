@@ -36,14 +36,23 @@ var mySettings =
             },
             {
                 'role':'omni',
-                'qty':3,
-                'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
+                'qty':4,
+                'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
+            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
 
             },
             {
                 'role':'omni',
-                'qty':3,
+                'qty':4,
+                'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
+            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
+
+            },
+            {
+                'role':'omni',
+                'qty':4,
                 'bodyParts': [WORK,WORK,CARRY,MOVE],
+            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
 
             },
             
