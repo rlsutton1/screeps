@@ -44,12 +44,14 @@ module.exports = {
 					structureType : STRUCTURE_EXTENSION
 				}
 			});
+			
+			var max = exts[room.controller.level];
 			var spawn = room.find(FIND_MY_SPAWNS)[0];
 			if (spawn !=null){
 				var pos = spawn.pos;
 				var ctr = 0;
-				for (var x = 0; x < 5; x++) {
-					for (var y = 0; y < 5; y++) {
+				for (var x = 0; x < Math.sqrt(max)+2; x++) {
+					for (var y = 0; y < Math.sqrt(max)+2; y++) {
 						if (Math.abs(x + y) > 1) {
 							if (createMoreExtensions(ctr, extensions, exts, room)) {
 								return;

@@ -12,7 +12,7 @@ var roleExplorer = {
 				+ Game.flags.ExploreRoom.room);
 
 		// check if we've reached the target room yet
-		if (creep.room.id != Game.flags.ExploreRoom.room.id)// Game.flags.ExploreRoom.room.name)
+		if (Game.flags.ExploreRoom.room == null || creep.room.name != Game.flags.ExploreRoom.room.name)
 		{
 			utils.log('explorer move');
 			if (creep.moveTo(Game.flags.ExploreRoom) == ERR_NO_PATH) {
@@ -28,14 +28,12 @@ var roleExplorer = {
 			} else {
 				creep.memory.claimed = true;
 				creep.memory.loading = true;
-				utils.log('claiming... '
-						+ creep.claimController(Game
-								.getObjectById('5982ffcdb097071b4adc335f')));
+				utils.log('claiming... ');
 			}
 			return;
 		}
 
-		utils.log("h.");
+		utils.log("e.");
 		if (creep.memory.loading) {
 
 			var energy = creep.pos.findInRange(FIND_DROPPED_RESOURCES, 1);
