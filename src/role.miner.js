@@ -21,8 +21,8 @@ var roleMiner = {
             }else
             {
                 if (creep.carry.energy > creep.carryCapacity/2.0){
-                    var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
-                    if (links.length>1)
+                    var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK || i.structureType == STRUCTURE_CONTAINER}); 
+                    if (links.length>0)
                     {
                         for (var i in links)
                         {
@@ -36,8 +36,8 @@ var roleMiner = {
         }else
         {
         	if (creep.carry.energy > creep.carryCapacity/2.0){
-                var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
-                if (links.length>1)
+                var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK || i.structureType == STRUCTURE_CONTAINER}); 
+                if (links.length>0)
                 {
                     for (var i in links)
                     {

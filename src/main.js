@@ -9,6 +9,12 @@ var mySettings =
    
         creepBuildList:
         [
+        	{
+                'role':'attacker',
+                'qty':1,
+                'bodyParts': [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE],
+                'condition': function(room){ return Game.flags.AttackRoom != null}
+            }, 
             {
                 'role':'defender',
                 'qty':1,

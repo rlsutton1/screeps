@@ -16,8 +16,8 @@ function chooseEnergySource(creep,utils)
 		return;
 	}
     // source or miner or link or container
-    var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
-    if (links.length>1)
+    var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK || i.structureType == STRUCTURE_CONTAINER}); 
+    if (links.length>0)
     {
        source = creep.pos.findClosestByPath(links);
        console.log("using link as source");
