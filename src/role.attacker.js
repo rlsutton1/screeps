@@ -10,9 +10,23 @@
 var roleAttacker = {
 	run : function(creep, utils) {
 
+		
+		//Game.flags.AttackRoom
+		
+		
+		
 		console.log('running attacker');
 		creep.say('a');
 
+		if (Game.flags.AttackRoom.room == null || creep.room.name != Game.flags.AttackRoom.room.name)
+		{
+			utils.log('attacker move');
+			creep.moveTo(Game.flags.AttackRoom);
+			return;
+		}
+
+		
+		
 		var target = utils.getStoredTarget(creep, 'attackerTarget');
 		console.log("current target is " + target);
 		if (target == null) {
