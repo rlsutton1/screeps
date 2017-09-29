@@ -50,15 +50,17 @@ module.exports = {
 			if (spawn !=null){
 				var pos = spawn.pos;
 				var ctr = 0;
-				for (var radius = 3; radius <= 20;radius++)
+				for (var radius = 1; radius <= 20;radius++)
 					for (var x = -radius; x <= radius;x++)
 						for (var y = -radius; y <= radius;y++)
 						{
 							if (createMoreExtensions(ctr, extensions, exts, room)) {
 								return;
 							}
-							ctr += createExtension(room, pos.x + x, pos.y + y,
+							if (Math.abs(x) > 1 && Math.abs(y) > 1) {
+								ctr += createExtension(room, pos.x + x, pos.y + y,
 									utils);
+							}
 						}
 			}
 		}
