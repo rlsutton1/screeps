@@ -11,9 +11,9 @@ var mySettings =
         [
         	{
                 'role':'attacker',
-                'qty':1,
+                'qty':0,
                 'bodyParts': [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE],
-                'condition': function(room){ return Game.flags.AttackRoom != null}
+            	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<12;}
             }, 
             {
                 'role':'defender',
