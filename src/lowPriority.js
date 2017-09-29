@@ -50,7 +50,7 @@ module.exports = {
 			if (spawn !=null){
 				var pos = spawn.pos;
 				var ctr = 0;
-				for (var radius = 1; radius <= 20;radius++)
+				for (var radius = 2; radius <= 20;radius++)
 					for (var x = -radius; x <= radius;x++)
 						for (var y = -radius; y <= radius;y++)
 						{
