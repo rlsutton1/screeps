@@ -25,18 +25,20 @@ var roleAttacker = {
 			return;
 		}
 
-		
+        		
 		
 		var target = utils.getStoredTarget(creep, 'attackerTarget');
 		console.log("current target is " + target);
+		
 		if (target == null) {
 			console.log("checking for hostiles");
-			var closestHostiles = creep.room.find(FIND_HOSTILE_STRUCTURES);
+			var closestHostiles = creep.room.find(FIND_HOSTILE_CREEPS);
 			console.log("hostiles are " + closestHostiles);
-
+            
 			for (h in closestHostiles) {
 				var hostile = closestHostiles[h];
-				console.log("found hostile " + hostile)
+				
+				console.log("found hostile " + hostile,0x222222)
 				if (hostile.owner.username != 'Cokezero') {
 					target = hostile;
 					console.log('target is ' + target);
@@ -45,6 +47,9 @@ var roleAttacker = {
 
 		}
 		if (target) {
+            
+
+//		    creep.heal(creep);
 			utils.storeTarget(creep, 'attackerTarget', target);
 			var result = creep.attack(target);
 			console.log("result " + result);
@@ -53,6 +58,9 @@ var roleAttacker = {
 					reusePath : 10
 				});
 			}
+		}else
+		{
+		    	creep.moveTo(Game.flags.AttackRoom);
 		}
 
 	}

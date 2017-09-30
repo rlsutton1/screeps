@@ -10,7 +10,7 @@
 var roleMiner = require('role.miner');
 var roleDefender = require('role.defender');
 var roleAttacker = require('role.attacker');
-
+var roleBouncer = require('role.bouncer');
 
 module.exports = {
 	run : function(room, utils) {
@@ -27,6 +27,9 @@ module.exports = {
 				}
 				if (creep.memory != null && creep.memory.role == 'attacker') {
 					roleAttacker.run(creep, utils);
+				}
+				if (creep.memory != null && creep.memory.role == 'bouncer') {
+					roleBouncer.run(creep, utils);
 				}
 	
 				if (creep.memory != null && creep.memory.role == 'defender') {
