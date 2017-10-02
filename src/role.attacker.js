@@ -76,7 +76,7 @@ function chooseHostile(closestHostiles)
 		
 		console.log("found hostile " + hostile,0x222222)
 		if (hostile.owner.username != 'Cokezero') {
-			console.log('target is ' + target);
+			console.log('target is ' + hostile);
 			return hostile;
 		}
 	}
