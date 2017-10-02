@@ -26,13 +26,6 @@ var roleAttacker = {
 		
 		if (target == null) {
 			
-			// move to flagged room
-			if (Game.flags.AttackRoom.room == null || creep.room.name != Game.flags.AttackRoom.room.name)
-			{
-				utils.log('attacker move');
-				creep.moveTo(Game.flags.AttackRoom);
-				return;
-			}
 
 			
 			console.log("checking for hostiles");
@@ -60,7 +53,7 @@ var roleAttacker = {
 			}
 		}else
 		{
-		    	creep.moveTo(Game.flags.AttackRoom);
+	    	creep.moveTo(Game.flags.AttackRoom);
 		}
 
 	}
