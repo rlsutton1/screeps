@@ -75,7 +75,7 @@ function chooseHostile(closestHostiles)
 		var hostile = closestHostiles[h];
 		
 		console.log("found hostile " + hostile,0x222222)
-		if (hostile.owner.username != 'Cokezero') {
+		if (hostile.owner.username != 'Cokezero' && hostile.structureType != STRUCTURE_CONTROLLER) {
 			console.log('target is ' + hostile);
 			return hostile;
 		}
