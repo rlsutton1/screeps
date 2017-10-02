@@ -18,12 +18,6 @@ var roleAttacker = {
 		console.log('running attacker');
 		creep.say('a');
 
-		if (Game.flags.AttackRoom.room == null || creep.room.name != Game.flags.AttackRoom.room.name)
-		{
-			utils.log('attacker move');
-			creep.moveTo(Game.flags.AttackRoom);
-			return;
-		}
 
         		
 		
@@ -31,21 +25,25 @@ var roleAttacker = {
 		console.log("current target is " + target);
 		
 		if (target == null) {
+			
+			// move to flagged room
+			if (Game.flags.AttackRoom.room == null || creep.room.name != Game.flags.AttackRoom.room.name)
+			{
+				utils.log('attacker move');
+				creep.moveTo(Game.flags.AttackRoom);
+				return;
+			}
+
+			
 			console.log("checking for hostiles");
 			var closestHostiles = creep.room.find(FIND_HOSTILE_CREEPS);
-			
-			console.log("hostiles are " + closestHostiles);
-            
-            closestHostiles = shuffle(closestHostiles);
-			for (h in closestHostiles) {
-				var hostile = closestHostiles[h];
-				
-				console.log("found hostile " + hostile,0x222222)
-				if (hostile.owner.username != 'Cokezero') {
-					target = hostile;
-					console.log('target is ' + target);
-				}
+			target = chooseHostile(closestHostiles);
+			if (target == null)
+			{
+				var closestHostiles = creep.room.find(FIND_HOSTILE_STRUCTURES);
+				target = chooseHostile(closestHostiles);
 			}
+			
 
 		}
 		if (target) {
@@ -65,6 +63,22 @@ var roleAttacker = {
 		    	creep.moveTo(Game.flags.AttackRoom);
 		}
 
+	}
+}
+
+function chooseHostile(closestHostiles)
+{
+	console.log("hostiles are " + closestHostiles);
+    
+    closestHostiles = shuffle(closestHostiles);
+	for (h in closestHostiles) {
+		var hostile = closestHostiles[h];
+		
+		console.log("found hostile " + hostile,0x222222)
+		if (hostile.owner.username != 'Cokezero') {
+			console.log('target is ' + target);
+			return hostile;
+		}
 	}
 }
 
