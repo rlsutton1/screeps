@@ -24,7 +24,7 @@ var roleBouncer = {
 		}else
 		if (Game.flags.bounce.room == null || creep.room.name != Game.flags.bounce.room.name)
 		{
-			creep.moveTo(Game.flags.AttackRoom);
+			creep.moveTo(Game.flags.bounce);
 		}
 		creep.heal(creep);
  

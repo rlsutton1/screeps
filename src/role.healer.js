@@ -15,7 +15,7 @@ var roleHealer = {
         
         var defender = utils.getStoredTarget(creep,'defenderTarget');
 	    if (defender==null) {
-            var defenders = _.filter(creep.room.find (FIND_MY_CREEPS), (creep) => creep.memory !=null && creep.memory.role == 'defender')
+            var defenders = _.filter(creep.room.find (FIND_MY_CREEPS), (creep) => creep.memory !=null && (creep.memory.role == 'defender'||creep.memory.role == 'defender'))
             defender = creep.pos.findClosestByPath(defenders);
         }
         if (defender !=null) {
