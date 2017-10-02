@@ -53,8 +53,8 @@ module.exports = {
 					for (var radius = 2; radius <= 20;radius++)
 					{ 	for (var c = 0; c <= radius;c++)
 						{
-							x = radius;
-							y = c;
+							var x = radius;
+							var y = c;
 							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
 							if (createMoreExtensions(ctr, extensions, exts, room)) {
 								return;
