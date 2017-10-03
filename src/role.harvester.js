@@ -39,7 +39,7 @@ var roleHarvester = {
                     creep.memory.action = null;
                 }else
                 {
-                    if(target.transfer(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    if(target.withdraw(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(target, {reusePath: 10});
                     }
                 }
@@ -78,7 +78,7 @@ var roleHarvester = {
             
             if (creep.memory.action == 'deliver')
             {
-                if(creep.transfer(closest, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if(creep.withdraw(closest, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(closest, {reusePath: 10});
                 }else
                 {

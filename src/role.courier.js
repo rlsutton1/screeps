@@ -56,7 +56,7 @@ var roleCourier = {
 	                	utils.storeTarget(creep,'myLoadingTarget',source);
 	                	creep.moveTo(source, {reusePath: 10});
 	                }
-	            }else if(source.transfer(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+	            }else if(source.withdraw(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
 	                utils.storeTarget(creep,'myLoadingTarget',source);
                     creep.moveTo(source, {reusePath: 10});
                 }
@@ -95,7 +95,7 @@ var roleCourier = {
             if(target!=null) {
                 utils.storeTarget(creep,'myTransferTarget',target);
                  utils.log('c.25');
-                if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, {reusePath: 10});
                 }else// if (target.carry.energy == target.energyCapacity)
                 {
