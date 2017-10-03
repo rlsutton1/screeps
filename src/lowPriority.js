@@ -23,7 +23,7 @@ function createMoreExtensions(ctr, extensions, exts, room) {
 			|| (ctr + extensions.length) > exts[room.controller.level];
 }
 
-function placeExtensions(room) {
+function placeExtensions(room,utils) {
 	var exts = [ 0, 0, 5, 10, 20, 30, 40, 50, 60 ];
 	
 	var extensions = room.find(FIND_MY_STRUCTURES, {
@@ -119,7 +119,7 @@ module.exports = {
 		for ( var room_it in Game.rooms) {
 			var room = Game.rooms[room_it];
 			if (room.controller.my){
-				placeExtensions(room)
+				placeExtensions(room,utils)
 			}
 			
 		}
