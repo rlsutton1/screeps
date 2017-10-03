@@ -23,6 +23,85 @@ function createMoreExtensions(ctr, extensions, exts, room) {
 			|| (ctr + extensions.length) > exts[room.controller.level];
 }
 
+function placeExtensions(room) {
+	var exts = [ 0, 0, 5, 10, 20, 30, 40, 50, 60 ];
+	
+	var extensions = room.find(FIND_MY_STRUCTURES, {
+		filter : {
+			structureType : STRUCTURE_EXTENSION
+		}
+	});
+	if (room.controller !=null){
+		var max = exts[room.controller.level];
+		var spawn = room.find(FIND_MY_SPAWNS)[0];
+		if (spawn !=null){
+			var pos = spawn.pos;
+			var ctr = 0;
+			for (var radius = 2; radius <= 20;radius++)
+			{ 	for (var c = 0; c <= radius;c++)
+				{
+					var x = radius;
+					var y = c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+
+					x = radius;
+					y = -c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+
+					x = -radius;
+					y = c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+
+					x = -radius;
+					y = -c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+
+
+					y = radius;
+					x = c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+
+					y = radius;
+					x = -c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+
+					y = -radius;
+					x = c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+
+					y = -radius;
+					x = -c;
+					ctr += createExtension(room, pos.x + x, pos.y + y, utils);
+					if (createMoreExtensions(ctr, extensions, exts, room)) {
+						return;
+					}
+				}
+			}
+		}
+}
+
+
 module.exports = {
 	run : function(utils) {
 
@@ -35,84 +114,13 @@ module.exports = {
 		}
 		utils.log('memory clear done');
 
-		var exts = [ 0, 0, 5, 10, 20, 30, 40, 50, 60 ];
 
 		for ( var room_it in Game.rooms) {
 			var room = Game.rooms[room_it];
-			var extensions = room.find(FIND_MY_STRUCTURES, {
-				filter : {
-					structureType : STRUCTURE_EXTENSION
-				}
-			});
-			if (room.controller !=null){
-				var max = exts[room.controller.level];
-				var spawn = room.find(FIND_MY_SPAWNS)[0];
-				if (spawn !=null){
-					var pos = spawn.pos;
-					var ctr = 0;
-					for (var radius = 2; radius <= 20;radius++)
-					{ 	for (var c = 0; c <= radius;c++)
-						{
-							var x = radius;
-							var y = c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-
-							x = radius;
-							y = -c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-
-							x = -radius;
-							y = c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-
-							x = -radius;
-							y = -c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-
-
-							y = radius;
-							x = c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-
-							y = radius;
-							x = -c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-
-							y = -radius;
-							x = c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-
-							y = -radius;
-							x = -c;
-							ctr += createExtension(room, pos.x + x, pos.y + y, utils);
-							if (createMoreExtensions(ctr, extensions, exts, room)) {
-								return;
-							}
-						}
-					}
-				}
+			if (room.controller.my){
+				placeExtensions(room)
 			}
+			
 		}
 
 	}

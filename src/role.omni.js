@@ -90,7 +90,7 @@ function chooseTarget(creep,utils)
 		creep.memory.targetType = 'construct';
 		// fall through to a room controller check
 	}
-	if (target == null  || creep.room.controller.ticksToDowngrade < 1000)
+	if (target == null  || creep.room.controller.ticksToDowngrade < 3100)
 	{
 		utils.storeTarget(creep,'target',creep.room.controller);
 		creep.memory.targetType = 'controller';
@@ -172,10 +172,6 @@ var roleOmni = {
     run: function(creep,utils) {
         
         console.log('running omni');
-        if ((creep.pos.x+creep.pos.y)%2==1)
-        {
-            creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
-        }
         if (creep.memory.mode == null || creep.carry.energy == 0){
         	creep.memory.mode = 'load';
         	creep.memory.target = null;
@@ -193,6 +189,13 @@ var roleOmni = {
         if (creep.memory.mode == 'deliver'){
             creep.say('o '+creep.memory.targetType);
         	deliver(creep,utils);
+        	
+        	// create road only when delivering and the target isn't a construction site
+            if (creep.memory.targetType != "construct" && (creep.pos.x+creep.pos.y)%2==1)
+            {
+                creep.room.createConstructionSite(creep.pos, STRUCTURE_ROAD);
+            }
+
         }
         if (creep.memory.mode == 'load'){
             creep.say('o '+creep.memory.sourceType);
