@@ -121,7 +121,7 @@ function deliver(creep,utils)
 	   	return;
 	}
     if (creep.memory.targetType == 'spawn'){
-    	if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+    	if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(target, {reusePath: 10});
     	}else {
     	    creep.memory.target = null;
@@ -129,7 +129,7 @@ function deliver(creep,utils)
     	return;
     }
     if (creep.memory.targetType == 'tower'){
-    	if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+    	if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(target, {reusePath: 10});
     	}else
     	{
@@ -155,7 +155,7 @@ function load(creep,utils)
         return;
 	}
 	if (creep.memory.sourceType =='miner')	{
-		if(source.withdraw(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+		if(source.transfer(creep, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(source, {reusePath: 10});
 		}
 		return;

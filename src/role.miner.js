@@ -27,7 +27,7 @@ var roleMiner = {
                         for (var i in links)
                         {
                             var link = links[i];
-                            creep.withdraw(link,RESOURCE_ENERGY);
+                            creep.transfer(link,RESOURCE_ENERGY);
                         }
                     }
                 }
@@ -42,7 +42,7 @@ var roleMiner = {
                     for (var i in links)
                     {
                         var link = links[i];
-                        creep.withdraw(link,RESOURCE_ENERGY,creep.carry.energy - creep.carryCapacity/2.0);
+                        creep.transfer(link,RESOURCE_ENERGY,creep.carry.energy - creep.carryCapacity/2.0);
                     }
                 }
             }
