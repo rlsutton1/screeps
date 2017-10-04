@@ -96,7 +96,7 @@ run:function (room,mySettings,utils) {
                 			console.log(part+" "+qty+" "+maxParts);
                 			for (var i =0;i < qty;i++)
                 			{
-                				body[ctr++] = part;
+                				body[ctr++] = part.toLowerCase();
                 				body[ctr++] = MOVE;
                 			}
                 		}
