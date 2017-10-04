@@ -34,7 +34,7 @@ var mySettings =
             {
                 'role':'miner',
                 'qty':4,
-                'maxbodyParts': 10,
+                'maxbodyParts': 8,
                 'bodyParts': {WORK:0.5,CARRY:0.5},
                 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
             },
