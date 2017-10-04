@@ -92,7 +92,7 @@ run:function (room,mySettings,utils) {
                 		{
                 			
                 			var qty = buildInfo[part]*maxParts;
-                			console.log(part+" "+qty);
+                			console.log(part+" "+qty+" "+maxParts);
                 			for (var i =0;i < qty;i++)
                 			{
                 				body[ctr++] = part;
