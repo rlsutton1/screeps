@@ -83,7 +83,7 @@ run:function (room,mySettings,utils) {
                 if(creeps.length <buildInfo.qty && shouldBuild) 
                 {
                 	var maxParts = buildInfo['maxbodyParts'];
-                 	for (var parts = maxParts; parts > 3;parts--)
+                 	for (var parts = maxParts; parts > 0;parts--)
                 	{
                 		var body = [];
                 		var ctr = 0;
