@@ -87,6 +87,7 @@ run:function (room,mySettings,utils) {
                 	{
                 		var body = [];
                 		var ctr = 0;
+                		console.log(buildInfo['bodyParts']);
                 		for (var part in buildInfo['bodyParts'])
                 		{
                 			var qty = buildInfo[part]*maxParts;
