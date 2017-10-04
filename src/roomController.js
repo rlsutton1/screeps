@@ -96,7 +96,7 @@ run:function (room,mySettings,utils) {
                 				body[ctr++] = MOVE;
                 			}
                 		}
-                		
+                		console.log(body);
                 		var newName = spawn.createCreep(body, undefined, {role: buildInfo['role']});
                         if (newName.length>2)
                         {
