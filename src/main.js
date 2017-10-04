@@ -13,91 +13,50 @@ var mySettings =
             {
                 'role':'defender',
                 'qty':1,
-                'bodyParts': [TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE],
+                'maxbodyParts': 10,
+                'bodyParts': {TOUGH:0.5,ATTACK:0.5},
                 'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
             }, 
             {
                 'role':'healer',
                 'qty':2,
-                'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE],
+                'maxbodyParts': 10,
+                'bodyParts': {TOUGH:0.5,HEAL:0.5},
                 'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
             },
             {
-                'role':'healer',
-                'qty':1,
-                'bodyParts': [TOUGH,TOUGH,HEAL,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE]
-            },
-            {
                 'role':'omni',
                 'qty':4,
-                'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE,MOVE],
+                'maxbodyParts': 10,
+                'bodyParts': {WORK:0.5,CARRY:0.5},
             	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
-
-
             },
-            {
-                'role':'omni',
-                'qty':4,
-                'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
-
-            },
-            {
-                'role':'omni',
-                'qty':4,
-                'bodyParts': [WORK,WORK,CARRY,CARRY,MOVE,MOVE],
-            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
-
-            },
-            {
-                'role':'omni',
-                'qty':4,
-                'bodyParts': [WORK,WORK,CARRY,MOVE],
-            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
-
-            },
-            
             {
                 'role':'miner',
                 'qty':4,
-                'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
+                'maxbodyParts': 10,
+                'bodyParts': {WORK:0.5,CARRY:0.5},
                 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
-            },
-            {
-                'role':'miner',
-                'qty':4,
-                'bodyParts': [WORK,WORK,WORK,CARRY,CARRY,CARRY,CARRY,MOVE,MOVE],
-                'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
-            },
-            {
-                'role':'miner',
-                'qty':2,
-                'bodyParts': [WORK,WORK,CARRY,MOVE]
             },
             {
                 'role':'explorer',
                 'qty':0,
-                'bodyParts': [CLAIM,WORK,CARRY,MOVE,MOVE],
+                'maxbodyParts': 10,
+                'bodyParts': {CLAIM:1,WORK:0.5,CARRY:0.5},
                 'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null &&  creep.memory.role == 'explorer').length<1;}
-            }
-            ,
-            {
-                'role':'explorer',
-                'qty':0,
-                'bodyParts': [WORK,WORK,WORK,WORK,CARRY,CARRY,CARRY,MOVE,MOVE,MOVE],
-                'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'explorer').length<2;}
             },
-            	{
+            {
                 'role':'attacker',
                 'qty':1,
-                'bodyParts': [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,ATTACK,ATTACK,ATTACK,ATTACK,ATTACK,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE],
+                'maxbodyParts': 100,
+                'bodyParts': {TOUGH:0.5,ATTACK:0.5},
             	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<2 && room.name=='E31N18'}
-            }
-            ,
+            },
         	{
             'role':'bouncer',
             'qty':0,
-            'bodyParts': [TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,HEAL,HEAL,HEAL,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE],
+            'maxbodyParts': 100,
+            'bodyParts': {TOUGH:0.5,HEAL:0.5},
         	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'bouncer').length<0 && room.name=='E31N18'}
         }
         ]

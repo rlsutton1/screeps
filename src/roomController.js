@@ -62,7 +62,8 @@ run:function (room,mySettings,utils) {
        utils.log("start room");
   
         var spawn = room.find(FIND_MY_SPAWNS)[0];
-        if (spawn){
+        if (spawn && !spawn.spawning){
+        	var spawnDone =false;
             for (var role in mySettings['creepBuildList'])
             {
                 var buildInfo = mySettings['creepBuildList'][role];
@@ -81,17 +82,37 @@ run:function (room,mySettings,utils) {
        
                 if(creeps.length <buildInfo.qty && shouldBuild) 
                 {
-                    var newName = spawn.createCreep(buildInfo.bodyParts, undefined, {role: buildInfo['role']});
-                    if (newName.length>2)
-                    {
-                        utils.log('Spawning new '+ buildInfo['role']+': ' + newName);
-                        utils.log("qty "+buildInfo.qty);
-                        utils.log("bodyParts "+buildInfo.bodyParts);
-                        break;
-                    }else
-                    {
-                        utils.log("Not spawning "+buildInfo['role']+" due to "+newName);
-                    }
+                	var maxParts = buildInfo['maxbodyParts'];
+                 	for (var parts = maxParts; parts > 3;parts--)
+                	{
+                		var body = [];
+                		var ctr = 0;
+                		for (var part in buildInfo['bodyParts'])
+                		{
+                			var qty = buildInfo[part]*maxParts;
+                			for (var i =0;i < qty;i++)
+                			{
+                				body[ctr++] = part;
+                				body[ctr++] = MOVE;
+                			}
+                		}
+                		
+                		var newName = spawn.createCreep(body, undefined, {role: buildInfo['role']});
+                        if (newName.length>2)
+                        {
+                            utils.log('Spawning new '+ buildInfo['role']+': ' + newName);
+                            utils.log("qty "+buildInfo.qty);
+                            utils.log("bodyParts "+buildInfo.bodyParts);
+                            break;
+                        }else
+                        {
+                            utils.log("Not spawning "+buildInfo['role']+" due to "+newName);
+                        }
+                	}
+                 	if (spawnDone)
+                 	{
+                 		break;
+                 	}
                 }
             }
         
