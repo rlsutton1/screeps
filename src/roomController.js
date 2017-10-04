@@ -90,8 +90,9 @@ run:function (room,mySettings,utils) {
                 		
                 		for (var part in buildInfo['bodyParts'])
                 		{
-                			
-                			var qty = buildInfo['bodyParts']['part']*maxParts;
+                			var partCount = buildInfo['bodyParts']['part'];
+                			console.log("part count "+partCount);
+                			var qty = *maxParts;
                 			console.log(part+" "+qty+" "+maxParts);
                 			for (var i =0;i < qty;i++)
                 			{
