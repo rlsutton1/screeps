@@ -10,6 +10,13 @@ var mySettings =
         creepBuildList:
         [
         
+        	{
+                'role':'omni',
+                'qty':4,
+                'maxbodyParts': 10,
+                'bodyParts': {WORK:0.5,CARRY:0.5},
+            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
+            },
             {
                 'role':'defender',
                 'qty':1,
@@ -23,13 +30,6 @@ var mySettings =
                 'maxbodyParts': 10,
                 'bodyParts': {TOUGH:0.5,HEAL:0.5},
                 'condition': function(room){ return room.memory.underAttack==true|| room.memory.hasInvaders == true}
-            },
-            {
-                'role':'omni',
-                'qty':4,
-                'maxbodyParts': 10,
-                'bodyParts': {WORK:0.5,CARRY:0.5},
-            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
             },
             {
                 'role':'miner',
