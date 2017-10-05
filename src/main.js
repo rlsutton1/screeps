@@ -196,7 +196,9 @@ function doTowers(room)
                 
                     if(closestDamagedStructure) 
                     {
-                    	if (Game.map.getTerrainAt(closestDamagedStructure.pos)== "swamp" ||closestDamagedStructure.structureType != STRUCTURE_ROAD)
+                    	var terrain = Game.map.getTerrainAt(closestDamagedStructure.pos);
+                    	console.log("terrain "+terrain+" type "+ closestDamagedStructure.structureType);
+                    	if (terrain== "swamp" ||closestDamagedStructure.structureType != STRUCTURE_ROAD)
                     	{	
                     		utils.log('repairing ....');
                     		tower.repair(closestDamagedStructure);
