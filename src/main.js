@@ -206,6 +206,7 @@ function doTowers(room)
                     	}
                     	else
                     	{
+                    		console.log("detroying ");
                     		closestDamagedStructure.destroy();
                     	}
                     }
