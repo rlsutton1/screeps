@@ -196,9 +196,16 @@ function doTowers(room)
                 
                     if(closestDamagedStructure) 
                     {
-                        utils.log('repairing ....');
-                        tower.repair(closestDamagedStructure);
-                        break;
+                    	if (Game.map.getTerrainAt(creep.pos)== "swamp" ||closestDamagedStructure.structureType != STRUCTURE_ROAD)
+                    	{	
+                    		utils.log('repairing ....');
+                    		tower.repair(closestDamagedStructure);
+                    		break;
+                    	}
+                    	else
+                    	{
+                    		closestDamagedStructure.destroy();
+                    	}
                     }
                 }
             }
