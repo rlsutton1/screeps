@@ -17,6 +17,17 @@ var roleBouncer = {
 		
 		console.log('running bouncer');
 		creep.say('bb');
+		
+		if (!creep.memory.reachedWayPoint){
+    		creep.moveTo(Game.flags.wayPoint);
+		}
+		if (!creep.memory.reachedWayPoint 
+		    && creep.room.id == 
+		    Game.flags.wayPoint.room.id)
+		{
+		    creep.memory.reachedWayPoint = true;
+		}
+		
 
 		if (creep.hits < creep.hitsMax)
 		{

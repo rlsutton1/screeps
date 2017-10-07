@@ -47,17 +47,17 @@ var mySettings =
             },
             {
                 'role':'attacker',
-                'qty':1,
-                'maxbodyParts': 100,
-                'bodyParts': {TOUGH:0.5,ATTACK:0.5},
-            	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<2 && room.name=='E31N18'}
+                'qty':0,
+                'maxbodyParts': 10,
+                'bodyParts': {TOUGH:0.3,ATTACK:0.3,HEAL:0.4},
+            	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<2 && room.name !='E33N16' &&room.name!='E31N18' }
             },
         	{
             'role':'bouncer',
             'qty':0,
-            'maxbodyParts': 100,
+            'maxbodyParts':12,
             'bodyParts': {TOUGH:0.5,HEAL:0.5},
-        	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'bouncer').length<0 && room.name=='E31N18'}
+        	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'bouncer').length<2 && room.name=='E31N16'}
         }
         ]
     };

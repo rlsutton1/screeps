@@ -18,10 +18,19 @@ var roleAttacker = {
 		console.log('running attacker');
 		creep.say('a');
 
+        if (creep.memory.flag == null)
+        {
+            var ctr = 0;
+            while (ctr < 30 && (creep.memory.flag == null  || Game.flags[creep.memory.flag]==null))
+            {
+                ctr++;
+                creep.memory.flag = 'AttackRoom'+Math.floor((Math.random() * 9) + 1);
+            }
+                
+        }
 
-        		
-		
-		var target = utils.getStoredTarget(creep, 'attackerTarget');
+
+ 		var target = utils.getStoredTarget(creep, 'attackerTarget');
 		console.log("current target is " + target);
 		
 		if (target == null) {
@@ -42,7 +51,6 @@ var roleAttacker = {
 		if (target) {
             
 
-//		    creep.heal(creep);
 			utils.storeTarget(creep, 'attackerTarget', target);
 			var result = creep.attack(target);
 			console.log("result " + result);
@@ -50,11 +58,16 @@ var roleAttacker = {
 				creep.moveTo(target, {
 					reusePath : 10
 				});
+				creep.heal(creep);
 			}
+	        
 		}else
 		{
-	    	creep.moveTo(Game.flags.AttackRoom);
+		    creep.heal(creep);
+	    	creep.moveTo(Game.flags[creep.memory.flag]);
 		}
+
+	   
 
 	}
 }
@@ -68,7 +81,7 @@ function chooseHostile(closestHostiles)
 		var hostile = closestHostiles[h];
 		
 		console.log("found hostile " + hostile,0x222222)
-		if (hostile.owner.username != 'Cokezero' && hostile.structureType != STRUCTURE_CONTROLLER) {
+		if (hostile.owner.username != 'Cokezero' && hostile.structureType != STRUCTURE_CONTROLLER&& hostile.structureType != STRUCTURE_POWER_BANK) {
 			console.log('target is ' + hostile);
 			return hostile;
 		}

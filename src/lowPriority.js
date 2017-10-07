@@ -118,7 +118,7 @@ module.exports = {
 
 		for ( var room_it in Game.rooms) {
 			var room = Game.rooms[room_it];
-			if (room.controller.my){
+			if (room.controller !=null && room.controller.my){
 				placeExtensions(room,utils)
 			}
 			
