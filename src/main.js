@@ -12,8 +12,8 @@ var mySettings =
         
         	{
                 'role':'omni',
-                'qty':4,
-                'maxbodyParts': 10,
+                'qty':3,
+                'maxbodyParts': 12,
                 'bodyParts': {WORK:0.5,CARRY:0.5},
             	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
             },
@@ -33,8 +33,8 @@ var mySettings =
             },
             {
                 'role':'miner',
-                'qty':5,
-                'maxbodyParts': 4,
+                'qty':6,
+                'maxbodyParts': 6,
                 'bodyParts': {WORK:0.4,CARRY:0.6},
                 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
             },
@@ -77,6 +77,13 @@ utils.log('starting up');
     room.activeLinks =room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
 
     doTowers(room);
+	var ramparts  = room.find(FIND_RAMPARTS);
+   	for (var r in ramparts)
+ 	{
+ 		ramparts[r].setPublic(room.memory.underAttack || room.memory.hasInvaders);
+ 	}
+
+    
     if (room.memory.underAttack) {
         if (roomDefence == null){
             roomDefence = require('roomDefence');
