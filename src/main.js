@@ -80,7 +80,7 @@ utils.log('starting up');
 	var ramparts  = room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_RAMPART}); ;
    	for (var r in ramparts)
  	{
- 		ramparts[r].setPublic(room.memory.underAttack || room.memory.hasInvaders);
+ 		ramparts[r].setPublic(!room.memory.underAttack && !room.memory.hasInvaders);
  	}
 
     
