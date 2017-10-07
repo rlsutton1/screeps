@@ -77,7 +77,7 @@ utils.log('starting up');
     room.activeLinks =room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK}); 
 
     doTowers(room);
-	var ramparts  = room.find(FIND_RAMPARTS);
+	var ramparts  = room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_RAMPART}); ;
    	for (var r in ramparts)
  	{
  		ramparts[r].setPublic(room.memory.underAttack || room.memory.hasInvaders);
