@@ -101,10 +101,11 @@ function chooseTarget(creep,utils)
 	        }
 	    });
 	    if(targets.length > 0 && Math.random() > 0.5) {
-	        var closest = creep.pos.findClosestByPath(targets);
+	        var closest = targets[0];
 	    
 	        utils.storeTarget(creep,'target',closest);
 			creep.memory.targetType = 'terminal';
+			target = closest;
 	    }
 		
 	}
