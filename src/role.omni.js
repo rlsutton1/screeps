@@ -97,7 +97,7 @@ function chooseTarget(creep,utils)
 	    var targets = creep.room.find(FIND_STRUCTURES, {
 	        filter: (structure) => {
 	            return structure.structureType == STRUCTURE_TERMINAL
-	                     && structure.store < structure.storeCapacity*0.9;
+	                     && structure.store[RESOURCE_ENERGY] < structure.storeCapacity*0.9;
 	        }
 	    });
 	    if(targets.length > 0 && Math.random() > 0.5) {
