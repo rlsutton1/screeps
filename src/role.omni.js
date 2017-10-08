@@ -104,7 +104,7 @@ function chooseTarget(creep,utils)
 	        var closest = creep.pos.findClosestByPath(targets);
 	    
 	        utils.storeTarget(creep,'target',closest);
-			creep.memory.targetType = 'tower';
+			creep.memory.targetType = 'terminal';
 	    }
 		
 	}
@@ -146,7 +146,7 @@ function deliver(creep,utils)
     	}
     	return;
     }
-    if (creep.memory.targetType == 'tower'){
+    if (creep.memory.targetType == 'tower'||creep.memory.targetType == 'terminal'){
     	if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             creep.moveTo(target, {reusePath: 10});
     	}else
