@@ -90,6 +90,24 @@ function chooseTarget(creep,utils)
 		creep.memory.targetType = 'construct';
 		// fall through to a room controller check
 	}
+	if (target == null)
+	{
+		// store energy to terminal
+		
+	    var targets = creep.room.find(FIND_STRUCTURES, {
+	        filter: (structure) => {
+	            return structure.structureType == STRUCTURE_TERMINAL
+	                     && structure.energy < structure.energyCapacity*0.9;
+	        }
+	    });
+	    if(targets.length > 0 && Math.random() > 0.5) {
+	        var closest = creep.pos.findClosestByPath(targets);
+	    
+	        utils.storeTarget(creep,'target',closest);
+			creep.memory.targetType = 'tower';
+	    }
+		
+	}
 	if (target == null  || creep.room.controller.ticksToDowngrade < 3100)
 	{
 		utils.storeTarget(creep,'target',creep.room.controller);
