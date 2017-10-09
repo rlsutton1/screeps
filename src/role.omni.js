@@ -117,7 +117,7 @@ function chooseTarget(creep,utils)
 	                     && structure.store[RESOURCE_ENERGY] < structure.storeCapacity*0.9;
 	        }
 	    });
-	    if(targets.length > 0 && Math.random() > 0.5) {
+	    if(targets.length > 0 && Math.random() > (targets[0].store[RESOURCE_ENERGY]/targets[0].storeCapacity*0.9)) {
 	        var closest = targets[0];
 	    
 	        utils.storeTarget(creep,'target',closest);
