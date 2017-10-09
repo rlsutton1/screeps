@@ -102,6 +102,46 @@ function placeExtensions(room,utils) {
 	}
 }
 
+functions moveEnergy()
+{
+	    if (Game.rooms.length>1)
+	    {
+	        var targetTerminal;
+	        var sourceTerminal;
+	        for ( var room_it in Game.rooms) {
+				var room = Game.rooms[room_it];
+				var terminals = creep.room.find(FIND_STRUCTURES, {
+			        filter: (structure) => {
+			            return structure.structureType == STRUCTURE_TERMINAL
+			        }
+			    });
+				if (terminals.lenght>0){
+	           
+					if (targetTerminal == null){
+						targetTerminal = terminals[0];
+					}
+					if (sourceTerminal == null){
+						sourceTerminal = terminals[0];
+					}
+					if (terminals[0].store[RESOURCE_ENERGY]> sourceTerminal.store[RESOURCE_ENERGY]){
+						sourceTerminal = terminals[0];
+					}
+					if (terminals[0].store[RESOURCE_ENERGY] < targetTerminal.store[RESOURCE_ENERGY]){
+						targetTerminal = terminals[0];
+					}
+	            }
+	        }
+	        var sourceEnergy = sourceTerminal.store[RESOURCE_ENERGY];
+	        var targetEnergy = targetTerminal.store[RESOURCE_ENERGY];
+	        var minEnergy = 10000
+	        if (sourceEnergy > 2.5*minEnergy)
+	        {
+	        	if (targetEnergy < minEnergy){
+	        		sourceTerminal.transferEnergy(targetTerminal,minEnergy);
+	        	}
+	        }
+	    }	
+}
 
 module.exports = {
 	run : function(utils) {
@@ -123,6 +163,8 @@ module.exports = {
 			}
 			
 		}
+		
+		moveEnergy();
 
 	}
 
