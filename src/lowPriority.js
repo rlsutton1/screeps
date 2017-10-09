@@ -102,7 +102,7 @@ function placeExtensions(room,utils) {
 	}
 }
 
-function moveEnergy()
+function moveEnergy(utils)
 {
 	    if (Game.rooms.length>1)
 	    {
@@ -138,7 +138,7 @@ function moveEnergy()
 	        {
 	        	if (targetEnergy < minEnergy){
 	        		var ret = sourceTerminal.transferEnergy(targetTerminal,minEnergy);
-	        		console.log("move energy returned "+ret+" ******************************");
+	        		utils.log("move energy returned "+ret+" ******************************");
 	        	}
 	        }
 	    }	
@@ -165,7 +165,7 @@ module.exports = {
 			
 		}
 		
-		moveEnergy();
+		moveEnergy(utils);
 
 	}
 
