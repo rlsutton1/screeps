@@ -15,11 +15,28 @@ function chooseEnergySource(creep,utils)
 	{
 		return;
 	}
+	
+	var terminals = creep.room.find(FIND_STRUCTURES, {
+	        filter: (structure) => {
+	            return structure.structureType == STRUCTURE_TERMINAL
+	                     && structure.store[RESOURCE_ENERGY] >= creep.carryCapacity;
+	        }
+	    });
+	
+	
     // source or miner or link or container
     var links =creep.room.find(FIND_STRUCTURES, {filter: (i) => i.structureType == STRUCTURE_LINK || i.structureType == STRUCTURE_CONTAINER}); 
     if (links.length>0)
     {
        source = creep.pos.findClosestByPath(links);
+       if (terminals.length > 0 && source.energy < (creep.carryCapacity/links.length))
+       {
+    	   // links are empty, so use a terminal
+           console.log("using terminal as source");
+           utils.storeTarget(creep,'source',terminals[0]);
+           creep.memory.sourceType = 'terminal';
+           return;
+       }
        console.log("using link as source");
        utils.storeTarget(creep,'source',source);
        creep.memory.sourceType = 'link';
@@ -165,7 +182,7 @@ function load(creep,utils)
 	chooseEnergySource(creep,utils);
 	var source = utils.getStoredTarget(creep,'source');
 	console.log(creep.memory.sourceType+" at "+source);
-	if (creep.memory.sourceType =='link') {
+	if (creep.memory.sourceType =='link' || creep.memory.sourceType =='terminal') {
 		var result = creep.withdraw(source,RESOURCE_ENERGY);
 		console.log('withdraw result '+result);
         if (result == ERR_NOT_IN_RANGE) {
