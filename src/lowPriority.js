@@ -102,7 +102,7 @@ function placeExtensions(room,utils) {
 	}
 }
 
-functions moveEnergy()
+function moveEnergy()
 {
 	    if (Game.rooms.length>1)
 	    {
