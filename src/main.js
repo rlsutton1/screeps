@@ -93,7 +93,7 @@ utils.log('starting up');
     highPriority.run(room,utils);
 }
 
-if (Game.time % 10 ==0){  
+if (Game.time % 100 ==0){  
     require('lowPriority').run(utils);
   
 }

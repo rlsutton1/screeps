@@ -144,7 +144,8 @@ function moveEnergy(utils)
 	        		}
 	        	}
 	        }
-	    }	
+	    }
+	    utils.emailLogs();
 }
 
 module.exports = {
