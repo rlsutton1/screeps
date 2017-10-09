@@ -137,7 +137,8 @@ function moveEnergy()
 	        if (sourceEnergy > 2.5*minEnergy)
 	        {
 	        	if (targetEnergy < minEnergy){
-	        		sourceTerminal.transferEnergy(targetTerminal,minEnergy);
+	        		var ret = sourceTerminal.transferEnergy(targetTerminal,minEnergy);
+	        		console.log("move energy returned "+ret+" ******************************");
 	        	}
 	        }
 	    }	
