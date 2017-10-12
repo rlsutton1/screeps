@@ -39,7 +39,7 @@ function chooseEnergySource(creep,utils)
        }
        var miners = _.filter(creep.room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner');
 
-       if (miners.length>0)
+       if (miners.length>0 || source.energy > creep.carryCapacity)
        {
     	   	console.log("using link as source");
        		utils.storeTarget(creep,'source',source);
