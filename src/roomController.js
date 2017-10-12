@@ -62,7 +62,9 @@ run:function (room,mySettings,utils) {
        utils.log("start room");
   
         var spawn = room.find(FIND_MY_SPAWNS)[0];
-        if (spawn && !spawn.spawning){// && spawn.energy >= spawn.energyCapacity){
+        var omnis = _.filter(roomsCreeps, (creep) =>  creep.memory !=null && creep.memory.role == 'omni');
+
+        if (spawn && !spawn.spawning && (spawn.energy >= spawn.energyCapacity || omnis.length == 0)){
         	var spawnDone =false;
             for (var role in mySettings['creepBuildList'])
             {

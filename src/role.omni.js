@@ -29,7 +29,7 @@ function chooseEnergySource(creep,utils)
     if (links.length>0)
     {
        source = creep.pos.findClosestByPath(links);
-       if (terminals.length > 0 && source.energy < (creep.carryCapacity/links.length))
+       if (terminals.length > 0 && (source == null || source.energy < (creep.carryCapacity/links.length)))
        {
     	   // links are empty, so use a terminal
            console.log("using terminal as source");
