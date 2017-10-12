@@ -37,10 +37,15 @@ function chooseEnergySource(creep,utils)
            creep.memory.sourceType = 'terminal';
            return;
        }
-       console.log("using link as source");
-       utils.storeTarget(creep,'source',source);
-       creep.memory.sourceType = 'link';
-       return;
+       var miners = _.filter(roomsCreeps, (creep) =>  creep.memory !=null && creep.memory.role == 'miner');
+
+       if (miners.length>0)
+       {
+    	   	console.log("using link as source");
+       		utils.storeTarget(creep,'source',source);
+       		creep.memory.sourceType = 'link';
+       		return;
+       }
     }
     source = utils.chooseMiner(creep);
     if (source.length>0)
