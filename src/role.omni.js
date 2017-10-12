@@ -37,7 +37,7 @@ function chooseEnergySource(creep,utils)
            creep.memory.sourceType = 'terminal';
            return;
        }
-       var miners = _.filter(roomsCreeps, (creep) =>  creep.memory !=null && creep.memory.role == 'miner');
+       var miners = _.filter(creep.room.creeps, (creep) =>  creep.memory !=null && creep.memory.role == 'miner');
 
        if (miners.length>0)
        {
