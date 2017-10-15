@@ -105,7 +105,6 @@ function placeExtensions(room,utils) {
 function moveEnergy(utils)
 {
        utils.log('move energy');
-       utils.log(""+Game.rooms);
 	    
 	        var targetTerminal;
 	        var sourceTerminal;
