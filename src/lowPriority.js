@@ -135,13 +135,13 @@ function moveEnergy(utils)
 	        if (sourceTerminal !=null && targetTerminal !=null){
 	        	var sourceEnergy = sourceTerminal.store[RESOURCE_ENERGY];
 	        	var targetEnergy = targetTerminal.store[RESOURCE_ENERGY];
-	        	utils.log("move energy source "+sourceEnergy+" target "+targetEnergy+" ******************************",interval);
+	        	utils.log("move energy source "+sourceEnergy+" target "+targetEnergy+" ******************************");
 	        	var minEnergy = 10000
 	        	if (sourceEnergy > 2.5*minEnergy)
 	        	{
 	        		if (sourceEnergy - targetEnergy > minEnergy){
 	        			var ret = sourceTerminal.send(RESOURCE_ENERGY,minEnergy,targetTerminal.room.name);
-	        			utils.log("move energy returned "+ret+" ******************************",interval);
+	        			utils.log("move energy returned "+ret+" ******************************");
 	        		}
 	        	}
 	        }
