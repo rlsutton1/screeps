@@ -34,8 +34,8 @@ var mySettings =
             {
                 'role':'miner',
                 'qty':6,
-                'maxbodyParts': 6,
-                'bodyParts': {WORK:0.4,CARRY:0.6},
+                'maxbodyParts': 5,
+                'bodyParts': {WORK:0.7,CARRY:0.3},
                 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
             },
             {
@@ -68,6 +68,7 @@ var mySettings =
 var utils = require('utils');
 var highPriority = require('highPriority');
 
+
 utils.log('starting up');
 
  var roomDefence = null;
@@ -81,6 +82,7 @@ utils.log('starting up');
    	for (var r in ramparts)
  	{
  		ramparts[r].setPublic(!room.memory.underAttack && !room.memory.hasInvaders);
+ 		ramparts[r].setPublic(false);
  	}
 
     
@@ -144,6 +146,9 @@ for(var room_it in Game.rooms) {
     console.log('Cpu Used '+Game.cpu.getUsed()+ " "+Game.cpu.bucket);
     
     utils.dumpLastException();
+    
+    
+
 
 
 function doTowers(room)

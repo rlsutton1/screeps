@@ -104,18 +104,19 @@ function placeExtensions(room,utils) {
 
 function moveEnergy(utils)
 {
-	    if (Game.rooms.length>1)
-	    {
+       utils.log('move energy');
+       utils.log(""+Game.rooms);
+	    
 	        var targetTerminal;
 	        var sourceTerminal;
 	        for ( var room_it in Game.rooms) {
 				var room = Game.rooms[room_it];
-				var terminals = creep.room.find(FIND_STRUCTURES, {
+				var terminals = room.find(FIND_STRUCTURES, {
 			        filter: (structure) => {
 			            return structure.structureType == STRUCTURE_TERMINAL
 			        }
 			    });
-				if (terminals.lenght>0){
+				if (terminals.length>0 && room.controller.my){
 	           
 					if (targetTerminal == null){
 						targetTerminal = terminals[0];
@@ -131,21 +132,22 @@ function moveEnergy(utils)
 					}
 	            }
 	        }
+	       utils.log('move energy got through rooms '+sourceTerminal+' '+targetTerminal);
 	        if (sourceTerminal !=null && targetTerminal !=null){
 	        	var sourceEnergy = sourceTerminal.store[RESOURCE_ENERGY];
 	        	var targetEnergy = targetTerminal.store[RESOURCE_ENERGY];
-	        	utils.log("move energy source "+sourceEnergy+" target "+targetEnergy+" ******************************");
+	        	utils.log("move energy source "+sourceEnergy+" target "+targetEnergy+" ******************************",interval);
 	        	var minEnergy = 10000
 	        	if (sourceEnergy > 2.5*minEnergy)
 	        	{
-	        		if (targetEnergy < minEnergy){
-	        			var ret = sourceTerminal.transferEnergy(targetTerminal,minEnergy);
-	        			utils.log("move energy returned "+ret+" ******************************");
+	        		if (sourceEnergy - targetEnergy > minEnergy){
+	        			var ret = sourceTerminal.send(RESOURCE_ENERGY,minEnergy,targetTerminal.room.name);
+	        			utils.log("move energy returned "+ret+" ******************************",interval);
 	        		}
 	        	}
 	        }
-	    }
-	    utils.emailLogs();
+	    
+
 }
 
 module.exports = {
