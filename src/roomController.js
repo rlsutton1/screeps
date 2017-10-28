@@ -106,6 +106,7 @@ run:function (room,mySettings,utils) {
         }
         utils.loggingOn();
         if (spawn && !spawn.spawning && room.controller.my){
+        	spawn.say(Game.time - room.memory.nextSpawn)
             if (room.memory.nextSpawn < Game.time)
             {
                 var spawnPlan= room.memory.spawnPlan;
