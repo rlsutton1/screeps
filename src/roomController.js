@@ -109,7 +109,7 @@ run:function (room,mySettings,utils) {
         	//spawn.say(Game.time - room.memory.nextSpawn)
         	
         	spawn.room.visual.text(
-        			Game.time - room.memory.nextSpawn,
+        			 room.memory.nextSpawn - Game.time ,
                    spawn.pos.x + 1, 
                    spawn.pos.y, 
                    {align: 'left', opacity: 0.8});
