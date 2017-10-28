@@ -12,10 +12,10 @@ var mySettings =
         
         	{
                 'role':'omni',
-                'qty':3,
+                'qty':2,
                 'maxbodyParts': 12,
                 'bodyParts': {WORK:0.5,CARRY:0.5},
-            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
+//            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
             },
             {
                 'role':'defender',
@@ -33,24 +33,24 @@ var mySettings =
             },
             {
                 'role':'miner',
-                'qty':6,
+                'qty':2,
                 'maxbodyParts': 4,
                 'bodyParts': {WORK:0.7,CARRY:0.3},
                 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'miner').length)}
             },
             {
                 'role':'explorer',
-                'qty':0,
-                'maxbodyParts': 10,
-                'bodyParts': {CLAIM:1,WORK:0.5,CARRY:0.5},
-                'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null &&  creep.memory.role == 'explorer').length<1;}
+                'qty':1,
+                'maxbodyParts': 11,
+                'bodyParts': {CLAIM:0.0,WORK:0.5,CARRY:0.5,ATTACK:0.5},
+                'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null &&  creep.memory.role == 'explorer').length<0 &&room.name =='E31N14';}
             },
             {
                 'role':'attacker',
                 'qty':0,
                 'maxbodyParts': 10,
-                'bodyParts': {TOUGH:0.3,ATTACK:0.3,HEAL:0.4},
-            	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<2 && room.name !='E33N16' &&room.name!='E31N18' }
+                'bodyParts': {TOUGH:0.3,ATTACK:0.3,HEAL:0.4,MOVE:0.2},
+            	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<1 && room.name=='E31N14' }
             },
         	{
             'role':'bouncer',
@@ -67,6 +67,8 @@ var mySettings =
 
 var utils = require('utils');
 var highPriority = require('highPriority');
+
+utils.loggingOff();
 
 
 utils.log('starting up');
@@ -143,7 +145,7 @@ for(var room_it in Game.rooms) {
         utils.emailLogs();
     }
 
-    console.log('Cpu Used '+Game.cpu.getUsed()+ " "+Game.cpu.bucket);
+    console.log('Cpu Used '+Game.cpu.getUsed()+ " "+Game.cpu.bucket+" "+Game.time);
     
     utils.dumpLastException();
     

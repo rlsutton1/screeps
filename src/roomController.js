@@ -16,6 +16,41 @@ var roleExplorer = require('role.explorer');
 var roleHealer = require('role.healer');
 var roleOmni = require('role.omni');
 
+var spawnFuct = function spawn(buildInfo,spawn,utils)
+{
+   
+    var maxParts = buildInfo['maxbodyParts'];
+    for (var parts = maxParts; parts > 0;parts--)
+    {
+    	var body = [];
+    	var ctr = 0;
+        		
+    	for (var part in buildInfo['bodyParts'])
+    	{
+    		var partCount = buildInfo['bodyParts'][part];
+    		utils.log("part count "+partCount);
+    		var qty = partCount*parts;
+    		utils.log(part+" "+qty+" "+maxParts);
+    		for (var i =0;i < qty;i++)
+    		{
+    			body[ctr++] = part.toLowerCase();
+    			body[ctr++] = MOVE;
+    		}
+    	}
+    	utils.log(body);
+    	var newName = spawn.createCreep(body, undefined, {role: buildInfo['role']});
+        if (newName.length>2)
+        {
+            utils.log('Spawning new '+ buildInfo['role']+': ' + newName);
+            utils.log("qty "+buildInfo.qty);
+            utils.log("bodyParts "+buildInfo.bodyParts);
+            return true;
+        }
+    }
+    utils.log("Not spawning "+buildInfo['role']+" due to "+newName);
+    return false;
+}
+
 module.exports = {
     
 
@@ -26,8 +61,8 @@ run:function (room,mySettings,utils) {
 
 
  utils.log('Tick limit '+Game.cpu.limit);
-
-
+ 
+  
     var links =room.activeLinks; 
     if (links.length>1)
     {
@@ -64,6 +99,37 @@ run:function (room,mySettings,utils) {
         var spawn = room.find(FIND_MY_SPAWNS)[0];
         var omnis = _.filter(roomsCreeps, (creep) =>  creep.memory !=null && creep.memory.role == 'omni');
 
+        if (!room.memory.nextSpawn){
+            room.memory.nextSpawn = Game.time+100;
+            room.memory.spawnIndex = 0;
+            room.memory.spawnPlan =  ['omni','miner','omni','miner','omni','miner','omni','miner'];
+        }
+        utils.loggingOn();
+        if (spawn && !spawn.spawning && room.controller.my){
+            if (room.memory.nextSpawn < Game.time)
+            {
+                var spawnPlan= room.memory.spawnPlan;
+                var spawnType = spawnPlan[room.memory.spawnIndex];
+                console.log('spawn type '+spawnType);
+                for (var role in mySettings['creepBuildList'])
+                {
+                    var buildInfo = mySettings['creepBuildList'][role];
+         
+                    if (buildInfo.role == spawnType){
+                        console.log('room ' +room.name);
+                        if (spawnFuct(buildInfo,spawn,utils))
+                        {
+                            room.memory.nextSpawn += (1500/spawnPlan.length);
+                            room.memory.spawnIndex = (room.memory.spawnIndex + 1)% spawnPlan.length;
+                        }
+                        break;
+                    }
+                }
+            }
+            
+        }
+        utils.loggingOff();
+
         if (spawn && !spawn.spawning){// && (spawn.energy >= spawn.energyCapacity || omnis.length == 0)){
         	var spawnDone =false;
             for (var role in mySettings['creepBuildList'])
@@ -84,38 +150,7 @@ run:function (room,mySettings,utils) {
        
                 if(creeps.length <buildInfo.qty && shouldBuild) 
                 {
-                	var maxParts = buildInfo['maxbodyParts'];
-                 	for (var parts = maxParts; parts > 0;parts--)
-                	{
-                		var body = [];
-                		var ctr = 0;
-                		
-                		for (var part in buildInfo['bodyParts'])
-                		{
-                			var partCount = buildInfo['bodyParts'][part];
-                			console.log("part count "+partCount);
-                			var qty = partCount*parts;
-                			console.log(part+" "+qty+" "+maxParts);
-                			for (var i =0;i < qty;i++)
-                			{
-                				body[ctr++] = part.toLowerCase();
-                				body[ctr++] = MOVE;
-                			}
-                		}
-                		console.log(body);
-                		var newName = spawn.createCreep(body, undefined, {role: buildInfo['role']});
-                        if (newName.length>2)
-                        {
-                            utils.log('Spawning new '+ buildInfo['role']+': ' + newName);
-                            utils.log("qty "+buildInfo.qty);
-                            utils.log("bodyParts "+buildInfo.bodyParts);
-                            break;
-                        }else
-                        {
-                            utils.log("Not spawning "+buildInfo['role']+" due to "+newName);
-                        }
-                	}
-                 	if (spawnDone)
+                 	if (spawnFuct(buildInfo,spawn,utils))
                  	{
                  		break;
                  	}
@@ -185,6 +220,5 @@ run:function (room,mySettings,utils) {
     utils.log('');
 }
     
-    
-
 };
+

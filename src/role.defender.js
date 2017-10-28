@@ -10,22 +10,22 @@
 var roleDefender = {
 	run : function(creep, utils) {
 
-		console.log('running defender');
+		utils.log('running defender');
 		creep.say('d');
 
 		var target = utils.getStoredTarget(creep, 'defenderTarget');
-		console.log("current target is " + target);
+		utils.log("current target is " + target);
 		if (target == null) {
-			console.log("checking for hostiles");
+			utils.log("checking for hostiles");
 			var closestHostiles = creep.room.find(FIND_HOSTILE_CREEPS);
-			console.log("hostiles are " + closestHostiles);
+			utils.log("hostiles are " + closestHostiles);
 
 			for (h in closestHostiles) {
 				var hostile = closestHostiles[h];
-				console.log("found hostile " + hostile)
+				utils.log("found hostile " + hostile)
 				if (hostile.owner.username != 'Cokezero') {
 					target = hostile;
-					console.log('target is ' + target);
+					utils.log('target is ' + target);
 				}
 			}
 
@@ -33,7 +33,7 @@ var roleDefender = {
 		if (target) {
 			utils.storeTarget(creep, 'defenderTarget', target);
 			var result = creep.attack(target);
-			console.log("result " + result);
+			utils.log("result " + result);
 			if (result == ERR_NOT_IN_RANGE) {
 				creep.moveTo(target, {
 					reusePath : 10

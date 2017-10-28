@@ -8,6 +8,8 @@ var roleExplorer = {
 
 		creep.say('e');
 		// creep.moveTo(Game.flags.ExploreRoom);
+		
+
 		utils.log("Explorer " + creep.room.name + " "
 				+ Game.flags.ExploreRoom.room);
 
@@ -32,6 +34,8 @@ var roleExplorer = {
 			}
 			return;
 		}
+
+        creep.memory.role = 'omni';
 
 		utils.log("e.");
 		if (creep.memory.loading) {

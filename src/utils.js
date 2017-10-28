@@ -9,16 +9,30 @@
 
 var loghistory = '';
 
+var logStatus = true;
+
 var logf = function(value)
 {
-    var message = 'Cpu Used '+Game.cpu.getUsed()+" "+value;
-    loghistory += message+'\n';
-    console.log(message);
+    if (logStatus){
+        var message = 'Cpu Used '+Game.cpu.getUsed()+" "+value;
+        loghistory += message+'\n';
+        console.log(message);
+    }
 }
 
 var lastException = null;
 
 var utilz = {
+
+loggingOff: function()
+{
+    logStatus = false;
+},
+
+loggingOn: function()
+{
+    logStatus = true;
+},
 
 findClosestSource: function(creep)
 {
@@ -89,9 +103,11 @@ storeTarget: function(creep,token,target)
 },
 log: function(value)
 {
-    var message = 'Cpu Used '+Game.cpu.getUsed()+" "+value;
-    logf( message);
-   // console.log(message);
+    if (logStatus){
+        var message = 'Cpu Used '+Game.cpu.getUsed()+" "+value;
+        logf( message);
+        // console.log(message);
+    }
 },
 emailLogs: function()
 {

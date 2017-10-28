@@ -15,8 +15,12 @@ var roleAttacker = {
 		
 		
 		
-		console.log('running attacker');
+		utils.log('running attacker');
 		creep.say('a');
+		
+	
+
+		
 
         if (creep.memory.flag == null)
         {
@@ -28,16 +32,17 @@ var roleAttacker = {
             }
                 
         }
+        creep.memory.flag='AttackRoom1';
 
 
  		var target = utils.getStoredTarget(creep, 'attackerTarget');
-		console.log("current target is " + target);
+		utils.log("current target is " + target);
 		
 		if (target == null) {
 			
 
 			
-			console.log("checking for hostiles");
+			utils.log("checking for hostiles");
 			var closestHostiles = creep.room.find(FIND_HOSTILE_CREEPS);
 			target = chooseHostile(closestHostiles);
 			if (target == null)
@@ -53,7 +58,7 @@ var roleAttacker = {
 
 			utils.storeTarget(creep, 'attackerTarget', target);
 			var result = creep.attack(target);
-			console.log("result " + result);
+			utils.log("result " + result);
 			if (result == ERR_NOT_IN_RANGE) {
 				creep.moveTo(target, {
 					reusePath : 10

@@ -32,7 +32,7 @@ function chooseEnergySource(creep,utils)
        if (terminals.length > 0 && (source == null || source.energy < (creep.carryCapacity/links.length)))
        {
     	   // links are empty, so use a terminal
-           console.log("using terminal as source");
+           utils.log("using terminal as source");
            utils.storeTarget(creep,'source',terminals[0]);
            creep.memory.sourceType = 'terminal';
            return;
@@ -41,7 +41,7 @@ function chooseEnergySource(creep,utils)
 
        if (miners.length>0 || source.energy > creep.carryCapacity)
        {
-    	   	console.log("using link as source");
+    	   	utils.log("using link as source");
        		utils.storeTarget(creep,'source',source);
        		creep.memory.sourceType = 'link';
        		return;
@@ -143,7 +143,7 @@ function deliver(creep,utils)
     chooseTarget(creep,utils);
 	var target = utils.getStoredTarget(creep,'target');
 	
-	console.log('deliver: target is '+creep.memory.targetType+" "+target)
+	utils.log('deliver: target is '+creep.memory.targetType+" "+target)
 
     if (creep.memory.targetType == 'construct'){
     	if (creep.build(target) == ERR_NOT_IN_RANGE) {
@@ -186,10 +186,10 @@ function load(creep,utils)
 {
 	chooseEnergySource(creep,utils);
 	var source = utils.getStoredTarget(creep,'source');
-	console.log(creep.memory.sourceType+" at "+source);
+	utils.log(creep.memory.sourceType+" at "+source);
 	if (creep.memory.sourceType =='link' || creep.memory.sourceType =='terminal') {
 		var result = creep.withdraw(source,RESOURCE_ENERGY);
-		console.log('withdraw result '+result);
+		utils.log('withdraw result '+result);
         if (result == ERR_NOT_IN_RANGE) {
         	creep.moveTo(source, {reusePath: 10});
         }
@@ -212,7 +212,7 @@ function load(creep,utils)
 var roleOmni = {
     run: function(creep,utils) {
         
-        console.log('running omni');
+        utils.log('running omni');
         if (creep.memory.mode == null || creep.carry.energy == 0){
         	creep.memory.mode = 'load';
         	creep.memory.target = null;
@@ -224,7 +224,7 @@ var roleOmni = {
         	creep.memory.source = null;
 		}
 
-        console.log('o '+creep.memory.mode);
+        utils.log('o '+creep.memory.mode);
 
         
         if (creep.memory.mode == 'deliver'){
@@ -243,7 +243,7 @@ var roleOmni = {
         }
         if (creep.memory.mode == 'load'){
             creep.say('o '+creep.memory.sourceType);
-            console.log('calling load ');
+            utils.log('calling load ');
         	load(creep,utils);
         }
     }
