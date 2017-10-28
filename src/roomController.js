@@ -127,7 +127,7 @@ run:function (room,mySettings,utils) {
                         console.log('room ' +room.name);
                         if (spawnFuct(buildInfo,spawn,utils))
                         {
-                            room.memory.nextSpawn += (1500/spawnPlan.length) - (Math.random()*5);
+                            room.memory.nextSpawn += Math.floor((1500/spawnPlan.length) - (Math.random()*5));
                             room.memory.spawnIndex = (room.memory.spawnIndex + 1)% spawnPlan.length;
                         }
                         break;
