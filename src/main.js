@@ -15,7 +15,9 @@ var mySettings =
                 'qty':2,
                 'maxbodyParts': 12,
                 'bodyParts': {WORK:0.5,CARRY:0.5},
-//            	'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) > (_.filter(room.find (FIND_MY_CREEPS), (creep) =>  creep.memory !=null && creep.memory.role == 'omni').length)}
+// 'condition': function(room){ return (room.find(FIND_SOURCES).length * 2) >
+// (_.filter(room.find (FIND_MY_CREEPS), (creep) => creep.memory !=null &&
+// creep.memory.role == 'omni').length)}
             },
             {
                 'role':'defender',
@@ -47,10 +49,10 @@ var mySettings =
             },
             {
                 'role':'attacker',
-                'qty':0,
-                'maxbodyParts': 10,
+                'qty':1,
+                'maxbodyParts': 20,
                 'bodyParts': {TOUGH:0.3,ATTACK:0.3,HEAL:0.4,MOVE:0.2},
-            	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<1 && room.name=='E31N14' }
+            	'condition': function(room){ return _.filter(Game.creeps, (creep) => creep.memory !=null && creep.memory.role == 'attacker').length<2 && room.name=='E31N16' }
             },
         	{
             'role':'bouncer',
@@ -63,7 +65,7 @@ var mySettings =
     };
 
  
-// test pull 
+// test pull
 
 var utils = require('utils');
 var highPriority = require('highPriority');
@@ -84,7 +86,7 @@ utils.log('starting up');
    	for (var r in ramparts)
  	{
  		ramparts[r].setPublic(!room.memory.underAttack && !room.memory.hasInvaders);
- 		ramparts[r].setPublic(false);
+// ramparts[r].setPublic(false);
  	}
 
     

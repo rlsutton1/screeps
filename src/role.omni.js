@@ -234,7 +234,8 @@ var roleOmni = {
             creep.say('o '+creep.memory.targetType);
         	deliver(creep,utils);
         	
-        	// create road only when delivering and the target isn't a construction site
+        	// create road only when delivering and the target isn't a
+			// construction site
             if (creep.memory.targetType != "construct" && (creep.pos.x+creep.pos.y)%2==1)
             {
             	if (Game.map.getTerrainAt(creep.pos)== "swamp")
